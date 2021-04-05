@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class CharacterController : MonoBehaviour
     private void OnEnable()
     {
         _input.Enable();
+        _input.Player.Jump.performed += _ => ExecuteJump();
     }
 
     private void OnDisable()
@@ -27,7 +29,7 @@ public class CharacterController : MonoBehaviour
 
     private void Update()
     {
-        SetMovementDirection();
+        SetMovementDirectionX(GetMovementInput());
     }
 
     private void FixedUpdate()
@@ -35,11 +37,11 @@ public class CharacterController : MonoBehaviour
         ExecuteMovement(GetNewVelocity());
     }
     
-    private void SetMovementDirection()
+    private void SetMovementDirectionX(float directionX)
     {
-        _directionX = GetMovementInput();
+        _directionX = directionX;
     }
-    
+
     private float GetMovementInput()
     {
         return _input.Player.Move.ReadValue<float>();
@@ -52,14 +54,19 @@ public class CharacterController : MonoBehaviour
 
     private Vector2 GetNewVelocity()
     {
-        Vector2 newVelocity = new Vector2(CalculateVelocityX(), _rigidbody.velocity.y) * Time.fixedDeltaTime;
+        Vector2 newVelocity = new Vector2(CalculateVelocityX(), _rigidbody.velocity.y);
 
         return newVelocity;
     }
 
     private float CalculateVelocityX()
     {
-        float velocityX = _directionX * _character.MovementSpeed;
+        float velocityX = _directionX * _character.MovementSpeed * Time.fixedDeltaTime;
         return velocityX;
+    }
+
+    private void ExecuteJump()
+    {
+        _rigidbody.AddForce(new Vector2(0, 14f), ForceMode2D.Impulse);
     }
 }
