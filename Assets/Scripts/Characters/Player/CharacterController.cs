@@ -19,7 +19,7 @@ public class CharacterController : MonoBehaviour
     private void OnEnable()
     {
         _input.Enable();
-        _input.Player.Jump.performed += _ => ExecuteJump();
+        _input.Player.Jump.performed += _ => _character.PerformJump();
     }
 
     private void OnDisable()
@@ -63,10 +63,5 @@ public class CharacterController : MonoBehaviour
     {
         float velocityX = _directionX * _character.MovementSpeed * Time.fixedDeltaTime;
         return velocityX;
-    }
-
-    private void ExecuteJump()
-    {
-        _rigidbody.AddForce(new Vector2(0, 14f), ForceMode2D.Impulse);
     }
 }
