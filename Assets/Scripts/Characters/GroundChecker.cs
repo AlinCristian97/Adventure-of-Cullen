@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundCheck : MonoBehaviour
+public class GroundChecker : MonoBehaviour
 {
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _checkRadius;
@@ -15,7 +15,7 @@ public class GroundCheck : MonoBehaviour
         _character.IsGrounded = CheckGrounded();
     }
 
-    public bool CheckGrounded()
+    private bool CheckGrounded()
     {
         return Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _whatIsGround);
     }

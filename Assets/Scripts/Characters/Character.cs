@@ -20,7 +20,7 @@ public abstract class Character : MonoBehaviour
         _jumpBehaviour = jumpBehaviour;
     }
     
-    public virtual void PerformJump()
+    public void PerformJump()
     {
         if (IsGrounded)
         {

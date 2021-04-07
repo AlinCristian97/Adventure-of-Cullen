@@ -402,7 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Cullen
   <MovementSpeed>k__BackingField: 300
-  _jumpForce: 15
+  _jumpForce: 16
   <IsGrounded>k__BackingField: 1
 --- !u!114 &659575329
 MonoBehaviour:
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 1415883213}
   - component: {fileID: 1415883215}
   m_Layer: 0
-  m_Name: GroundCheck
+  m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -569,7 +569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _groundCheck: {fileID: 1415883213}
-  _checkRadius: 0.15
+  _checkRadius: 0.1
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
