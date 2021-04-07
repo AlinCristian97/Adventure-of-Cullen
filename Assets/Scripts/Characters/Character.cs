@@ -1,4 +1,6 @@
 using System;
+using StrategyPattern;
+using StrategyPattern.Interfaces;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -8,6 +10,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected string _name;
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [SerializeField] protected float _jumpForce;
+    [field: SerializeField] public bool IsGrounded { get; set; } = true;
     
     protected IJumpBehaviour _jumpBehaviour;
 
@@ -16,9 +19,12 @@ public abstract class Character : MonoBehaviour
     {
         _jumpBehaviour = jumpBehaviour;
     }
-
+    
     public void PerformJump()
     {
-        _jumpBehaviour.Jump(_rigidbody, _jumpForce);
+        if (IsGrounded)
+        {
+            _jumpBehaviour.Jump(_rigidbody, _jumpForce);
+        }
     }
 }
