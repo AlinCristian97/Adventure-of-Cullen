@@ -1,30 +1,27 @@
-using Interfaces.ObserverPattern;
+using StrategyPattern.Behaviours;
 using UnityEngine;
 
-public class Player : Character, IObserver
+public class Player : Character
 {
-    private bool _hasExtraJump;
-    private ISubject _groundCheck;
+    private int _numberOfJumps = 2;
     
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _jumpBehaviour = new HumanJump();
-        _groundCheck = GetComponentInChildren<GroundCheck>();
-        _groundCheck.RegisterObserver(this);
     }
 
     public override void PerformJump()
     {
-        if (IsGrounded || _hasExtraJump)
+        if (IsGrounded || _numberOfJumps > 0)
         {
             _jumpBehaviour.Jump(_rigidbody, _jumpForce);
-            _hasExtraJump = false;
+            _numberOfJumps--;
         }
     }
 
-    public void GetNotified()
+    public void ResetNumberOfJumps()
     {
-        _hasExtraJump = !IsGrounded;
+        _numberOfJumps = 2;
     }
 }

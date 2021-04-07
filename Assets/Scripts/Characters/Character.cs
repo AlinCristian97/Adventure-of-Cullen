@@ -1,4 +1,6 @@
 using System;
+using StrategyPattern;
+using StrategyPattern.Interfaces;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -17,7 +19,7 @@ public abstract class Character : MonoBehaviour
     {
         _jumpBehaviour = jumpBehaviour;
     }
-
+    
     public virtual void PerformJump()
     {
         if (IsGrounded)
