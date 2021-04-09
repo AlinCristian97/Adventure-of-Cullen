@@ -7,11 +7,10 @@ public class Player : Character
 {
     [SerializeField] private UnityEvent _onCharacterJump;
 
-    private void Awake()
-    {
-        Rigidbody = GetComponent<Rigidbody2D>();
-        _jumpBehaviour = new HumanJump();
-    }
+    // private void Awake()
+    // {
+    //     _jumpBehaviour = new HumanJump();
+    // }
 
     public override void PerformJump()
     {

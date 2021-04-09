@@ -61,7 +61,7 @@ public class CharacterController : MonoBehaviour
 
     private float CalculateVelocityX()
     {
-        float velocityX = _directionX * _character.MovementSpeed * Time.fixedDeltaTime;
+        float velocityX = _directionX * _character.Stats.MovementSpeed * Time.fixedDeltaTime;
         return velocityX;
     }
 }

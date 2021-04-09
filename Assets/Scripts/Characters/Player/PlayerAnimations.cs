@@ -19,7 +19,7 @@ public class PlayerAnimations : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetFloat("yVelocity", _character.Rigidbody.velocity.y);
+        _animator.SetFloat("yVelocity", _character.Components.Rigidbody.velocity.y);
     }
 
     public void TriggerJumpAnimation()
