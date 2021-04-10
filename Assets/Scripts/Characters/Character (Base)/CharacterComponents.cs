@@ -5,4 +5,5 @@ using UnityEngine;
 public abstract class CharacterComponents
 {
     [field: SerializeField] public Rigidbody2D Rigidbody { get; private set; }
+    [field: SerializeField] public Animator Animator { get; private set; }
 }

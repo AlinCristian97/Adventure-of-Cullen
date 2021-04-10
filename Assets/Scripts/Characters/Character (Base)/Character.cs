@@ -11,13 +11,13 @@ public abstract class Character<TBrain, TActions, TStats, TComponents, TReferenc
     where TComponents : CharacterComponents
     where TReferences : CharacterReferences
 {
-    protected TBrain _brain;
-    protected TActions _actions;
+    protected TBrain Brain { get; set; }
+    protected TActions Actions { get; set; }
     [field: SerializeField] public TStats Stats { get; protected set; }
     [field: SerializeField] public TComponents Components { get; protected set; }
-    protected TReferences _references;
+    protected TReferences References { get; }
 
-    
+
     // [SerializeField] protected float _jumpForce;
     // [field: SerializeField] public bool IsGrounded { get; set; } = true;
     //

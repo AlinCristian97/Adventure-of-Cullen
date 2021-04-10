@@ -18,19 +18,19 @@ public class Player : Character<PlayerBrain, PlayerActions, PlayerStats, PlayerC
     //     _onCharacterJump?.Invoke();
     // }
 
-    protected void Awake()
+    private void Awake()
     {
-        _brain = new PlayerBrain(this);
-        _actions = new PlayerActions(this);
+        Brain = new PlayerBrain(this);
+        Actions = new PlayerActions(this);
     }
     
     private void Update()
     {
-        _brain.HandleDecisions();
+        Brain.HandleDecisions();
     }
 
     private void FixedUpdate()
     {
-        _actions.Move();
+        Actions.Move();
     }
 }
