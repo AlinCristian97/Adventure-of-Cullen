@@ -3,18 +3,34 @@ using StrategyPattern.Behaviours;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Player : Character
+public class Player : Character<PlayerBrain, PlayerActions, PlayerStats, PlayerComponents, PlayerReferences>
 {
-    [SerializeField] private UnityEvent _onCharacterJump;
+    // [SerializeField] private UnityEvent _onCharacterJump;
 
     // private void Awake()
     // {
     //     _jumpBehaviour = new HumanJump();
     // }
+    
+    // public override void PerformJump()
+    // {
+    //     base.PerformJump();
+    //     _onCharacterJump?.Invoke();
+    // }
 
-    public override void PerformJump()
+    protected void Awake()
     {
-        base.PerformJump();
-        _onCharacterJump?.Invoke();
+        _brain = new PlayerBrain(this);
+        _actions = new PlayerActions(this);
+    }
+    
+    private void Update()
+    {
+        _brain.HandleDecisions();
+    }
+
+    private void FixedUpdate()
+    {
+        _actions.Move();
     }
 }

@@ -8,11 +8,11 @@ public class GroundChecker : MonoBehaviour
     [SerializeField] private float _checkRadius;
     [SerializeField] private LayerMask _whatIsGround;
     
-    [SerializeField] private Character _character;
+    // [SerializeField] private Character _character;
 
     private void FixedUpdate()
     {
-        _character.IsGrounded = CheckGrounded();
+        // _character.IsGrounded = CheckGrounded();
     }
 
     private bool CheckGrounded()

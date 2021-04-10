@@ -327,7 +327,6 @@ GameObject:
   - component: {fileID: 659575325}
   - component: {fileID: 659575327}
   - component: {fileID: 659575328}
-  - component: {fileID: 659575329}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -400,40 +399,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad95692dbfddeb4ba6b235edb378c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Stats>k__BackingField:
+    <Name>k__BackingField: Cullen
+    <MovementSpeed>k__BackingField: 300
   <Components>k__BackingField:
     <Rigidbody>k__BackingField: {fileID: 659575325}
-  <Stats>k__BackingField:
-    <MovementSpeed>k__BackingField: 300
-  _name: Cullen
-  _jumpForce: 16
-  <IsGrounded>k__BackingField: 1
-  _onCharacterJump:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1951964067}
-        m_TargetAssemblyTypeName: PlayerAnimations, Assembly-CSharp
-        m_MethodName: TriggerJumpAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &659575329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 659575324}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f66d597de2e4f0383bf4a175ec24cec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1184036162
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,7 +561,6 @@ MonoBehaviour:
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  _character: {fileID: 659575328}
 --- !u!1 &1647357940
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,7 +604,6 @@ GameObject:
   - component: {fileID: 1951964065}
   - component: {fileID: 1951964064}
   - component: {fileID: 1951964066}
-  - component: {fileID: 1951964067}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -727,15 +695,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1951964067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1951964063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47d7ca024a81821419b67abc45eae487, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
