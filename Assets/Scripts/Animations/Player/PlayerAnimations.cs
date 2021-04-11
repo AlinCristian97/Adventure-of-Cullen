@@ -39,17 +39,17 @@ public class PlayerAnimations : MonoBehaviour
 
     private void PlayRunAnimation()
     {
-        _player.Components.Animator.TryPlayAnimation("Run");
+        _player.References.Animator.TryPlayAnimation("Run");
     }
 
     private void PlayIdleAnimation()
     {
-        _player.Components.Animator.TryPlayAnimation("Idle");
+        _player.References.Animator.TryPlayAnimation("Idle");
     }
 
     private void PlayJumpAnimation()
     {
-        _player.Components.Animator.TryPlayAnimation("Jump");
+        _player.References.Animator.TryPlayAnimation("Jump");
     }
     
     private void FlipHorizontal()

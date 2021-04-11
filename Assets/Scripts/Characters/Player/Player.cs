@@ -1,14 +1,14 @@
-using System;
 using StrategyPattern.Behaviours;
 using UnityEngine;
 
-public class Player : Character
+[RequireComponent(typeof(Rigidbody2D))]
+public class Player : MonoBehaviour
 {
     [field: SerializeField] public PlayerBrain Brain { get; private set; }
     public PlayerActions Actions { get; private set; }
     [field: SerializeField] public PlayerStats Stats { get; private set; }
     [field: SerializeField] public PlayerComponents Components { get; private set; }
-    private PlayerReferences References { get; }
+    [field: SerializeField] public PlayerReferences References { get; private set; }
 
     private void OnEnable()
     {
@@ -49,6 +49,6 @@ public class Player : Character
             new AnyStateAnimation("Jump")
         };
         
-        Components.Animator.AddAnimations(animations);
+        References.Animator.AddAnimations(animations);
     }
 }

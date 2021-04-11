@@ -1,7 +1,7 @@
 ﻿using StrategyPattern.Interfaces;
 using UnityEngine;
 
-public class PlayerActions : CharacterActions
+public class PlayerActions
 {
     private Player _player;
     private IJumpBehaviour _jumpBehaviour;
@@ -20,7 +20,7 @@ public class PlayerActions : CharacterActions
         return horizontalVelocity;
     }
     
-    public override void Move()
+    public void Move()
     {
         _player.Components.Rigidbody.velocity = GetNewVelocity();
     }

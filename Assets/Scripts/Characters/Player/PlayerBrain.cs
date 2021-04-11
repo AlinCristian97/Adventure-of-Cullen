@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class PlayerBrain : CharacterBrain
+public class PlayerBrain
 {
     private Player _player;
     public InputMaster Input { get; }
@@ -17,7 +17,7 @@ public class PlayerBrain : CharacterBrain
         Input.Player.Jump.performed += _ => _player.Actions.TryJump();
     }
 
-    public override void HandleDecisions()
+    public void HandleDecisions()
     {
         SetMovementDirection();
     }
