@@ -404,6 +404,7 @@ MonoBehaviour:
     <MovementSpeed>k__BackingField: 300
   <Components>k__BackingField:
     <Rigidbody>k__BackingField: {fileID: 659575325}
+    <Animator>k__BackingField: {fileID: 1951964067}
 --- !u!1 &1184036162
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,11 +557,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505eaea01932c7d419d41dbb44e04480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundCheck: {fileID: 1415883213}
-  _checkRadius: 0.1
-  _whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &1647357940
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,8 +600,10 @@ GameObject:
   - component: {fileID: 1951964065}
   - component: {fileID: 1951964064}
   - component: {fileID: 1951964066}
+  - component: {fileID: 1951964067}
+  - component: {fileID: 1951964068}
   m_Layer: 0
-  m_Name: Visual
+  m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -695,3 +693,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1951964067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951964063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77273d463b4a33240bd58c3f39368191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1951964068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951964063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc727d3b0499cc44a9d4097889d9465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 659575328}

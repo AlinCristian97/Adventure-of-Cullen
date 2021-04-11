@@ -18,10 +18,11 @@ public class Player : Character<PlayerBrain, PlayerActions, PlayerStats, PlayerC
     //     _onCharacterJump?.Invoke();
     // }
 
-    private void Awake()
+    private void Start()
     {
         Brain = new PlayerBrain(this);
         Actions = new PlayerActions(this);
+        AddAnimations();
     }
     
     private void Update()
@@ -31,6 +32,16 @@ public class Player : Character<PlayerBrain, PlayerActions, PlayerStats, PlayerC
 
     private void FixedUpdate()
     {
-        Actions.Move();
+        Actions.Move(transform);
+    }
+
+    private void AddAnimations()
+    {
+        AnyStateAnimation[] animations = {
+            new AnyStateAnimation("Idle"),
+            new AnyStateAnimation("Run")
+        };
+        
+        Components.Animator.AddAnimations(animations);
     }
 }

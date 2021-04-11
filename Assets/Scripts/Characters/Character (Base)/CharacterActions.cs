@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class CharacterActions
 {
-    public abstract void Move();
+    public abstract void Move(Transform transform);
 }

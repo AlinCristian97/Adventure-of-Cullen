@@ -17,7 +17,7 @@ public class PlayerActions : CharacterActions
         return horizontalVelocity;
     }
     
-    public override void Move()
+    public override void Move(Transform transform)
     {
         _player.Components.Rigidbody.velocity = GetNewVelocity();
     }

@@ -28,22 +28,22 @@ TextureImporter:
     second: Adventurer_7
   - first:
       213: -8327724297079253722
-    second: Adventurer_8
+    second: Run_1
   - first:
       213: -1438920706137421010
-    second: Adventurer_9
+    second: Run_2
   - first:
       213: -5076560966415627203
-    second: Adventurer_10
+    second: Run_3
   - first:
       213: 7386564698544274468
-    second: Adventurer_11
+    second: Run_4
   - first:
       213: 3861748583855027040
-    second: Adventurer_12
+    second: Run_5
   - first:
       213: -4483765920058100141
-    second: Adventurer_13
+    second: Run_6
   - first:
       213: -1479004669254472758
     second: Jump_1
@@ -598,7 +598,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_8
+      name: Run_1
       rect:
         serializedVersion: 2
         x: 50
@@ -619,7 +619,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_9
+      name: Run_2
       rect:
         serializedVersion: 2
         x: 100
@@ -640,7 +640,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_10
+      name: Run_3
       rect:
         serializedVersion: 2
         x: 150
@@ -661,7 +661,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_11
+      name: Run_4
       rect:
         serializedVersion: 2
         x: 200
@@ -682,7 +682,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_12
+      name: Run_5
       rect:
         serializedVersion: 2
         x: 250
@@ -703,7 +703,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_13
+      name: Run_6
       rect:
         serializedVersion: 2
         x: 300
