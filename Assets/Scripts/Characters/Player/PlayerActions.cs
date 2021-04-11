@@ -1,17 +1,24 @@
-﻿using StrategyPattern.Interfaces;
+﻿using StrategyPattern.Behaviours;
+using StrategyPattern.Interfaces;
 using UnityEngine;
 
+[System.Serializable]
 public class PlayerActions
 {
     private Player _player;
     private IJumpBehaviour _jumpBehaviour;
 
-    public PlayerActions(Player player, IJumpBehaviour jumpBehaviour)
+    public PlayerActions(Player player)
     {
         _player = player;
-        _jumpBehaviour = jumpBehaviour;
+        _jumpBehaviour = new HumanJump();
     }
     
+    public PlayerActions(Player player, IJumpBehaviour jumpBehaviour) : this(player)
+    {
+        _jumpBehaviour = jumpBehaviour;
+    }
+
     private Vector2 GetNewVelocity() => new Vector2(CalculateHorizontalVelocity(), _player.Brain.Direction.y);
     
     private float CalculateHorizontalVelocity()
@@ -27,10 +34,9 @@ public class PlayerActions
 
     public void TryJump()
     {
-        if (_player.Brain.IsGrounded())
+        if (_player.Brain.IsGrounded)
         {
             _jumpBehaviour.Jump(_player.Components.Rigidbody, _player.Stats.JumpForce);
-            PlayerAnimations.OnPlayerJump?.Invoke();
         }
     }
 }

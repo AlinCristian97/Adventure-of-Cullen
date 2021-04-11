@@ -1,59 +1,51 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
+﻿using System;
+using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimations : MonoBehaviour
 {
     [SerializeField] private Player _player;
     private SpriteRenderer _spriteRenderer;
-    public static UnityEvent OnPlayerJump { get; private set; }
+    private Animator _animator;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        OnPlayerJump = new UnityEvent();
-        OnPlayerJump.AddListener(PlayJumpAnimation);
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        HandleAnimations();
+        UpdateAnimations();
     }
 
-    private void HandleAnimations()
+    private void UpdateAnimations()
     {
-        MoveAnimation();
+        HandleMovementAnimation();
+        HandleJumpAnimation();
     }
 
-    private void MoveAnimation()
+    private void HandleMovementAnimation()
     {
-        if (_player.Brain.Direction.x != 0)
-        {
-            PlayRunAnimation();
-            FlipHorizontal();
-        }
-        else if (_player.Components.Rigidbody.velocity == Vector2.zero)
-        {
-            PlayIdleAnimation();
-        }
+        _animator.SetBool("isRunning", _player.Brain.Direction.x != 0 && _player.Brain.Direction.y == 0);
+        FlipHorizontal();
     }
 
-    private void PlayRunAnimation()
+    private void HandleJumpAnimation()
     {
-        _player.References.Animator.TryPlayAnimation("Run");
-    }
-
-    private void PlayIdleAnimation()
-    {
-        _player.References.Animator.TryPlayAnimation("Idle");
-    }
-
-    private void PlayJumpAnimation()
-    {
-        _player.References.Animator.TryPlayAnimation("Jump");
+        _animator.SetBool("isGrounded", _player.Brain.IsGrounded);
+        _animator.SetFloat("yVelocity", _player.Brain.Direction.y);
     }
     
     private void FlipHorizontal()
     {
-        _spriteRenderer.flipX = _player.Brain.Direction.x < 0;
+        if (_player.Brain.Direction.x < 0)
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else if (_player.Brain.Direction.x > 0)
+        {
+            _spriteRenderer.flipX = false;
+        }
     }
 }

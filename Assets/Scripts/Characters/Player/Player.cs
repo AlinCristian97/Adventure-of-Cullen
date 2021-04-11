@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [field: SerializeField] public PlayerBrain Brain { get; private set; }
-    public PlayerActions Actions { get; private set; }
+    [field: SerializeField] public PlayerActions Actions { get; private set; }
     [field: SerializeField] public PlayerStats Stats { get; private set; }
     [field: SerializeField] public PlayerComponents Components { get; private set; }
     [field: SerializeField] public PlayerReferences References { get; private set; }
@@ -23,14 +23,9 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Brain = new PlayerBrain(this);
-        Actions = new PlayerActions(this, new HumanJump());
+        Actions = new PlayerActions(this);
     }
 
-    private void Start()
-    {
-        AddAnimations();
-    }
-    
     private void Update()
     {
         Brain.HandleDecisions();
@@ -39,16 +34,5 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Actions.Move();
-    }
-    
-    private void AddAnimations()
-    {
-        AnyStateAnimation[] animations = {
-            new AnyStateAnimation("Idle"),
-            new AnyStateAnimation("Run"),
-            new AnyStateAnimation("Jump")
-        };
-        
-        References.Animator.AddAnimations(animations);
     }
 }

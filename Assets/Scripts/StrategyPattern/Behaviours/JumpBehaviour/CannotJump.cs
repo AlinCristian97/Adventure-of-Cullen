@@ -7,6 +7,7 @@ namespace StrategyPattern.Behaviours
     {
         public void Jump(Rigidbody2D rigidbody, float jumpForce)
         {
+            Debug.Log("Cannot Jump!");
             // can't jump
         }
     }
