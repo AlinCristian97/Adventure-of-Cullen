@@ -367,7 +367,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1951964065}
-  - {fileID: 1415883213}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -402,9 +401,11 @@ MonoBehaviour:
   <Stats>k__BackingField:
     <Name>k__BackingField: Cullen
     <MovementSpeed>k__BackingField: 300
+    <JumpForce>k__BackingField: 15
   <Components>k__BackingField:
     <Rigidbody>k__BackingField: {fileID: 659575325}
     <Animator>k__BackingField: {fileID: 1951964067}
+    <Collider>k__BackingField: {fileID: 659575327}
 --- !u!1 &1184036162
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,49 +515,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1415883212
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1415883213}
-  - component: {fileID: 1415883215}
-  m_Layer: 0
-  m_Name: GroundChecker
-  m_TagString: Untagged
-  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1415883213
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415883212}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.564, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 659575326}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1415883215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415883212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 505eaea01932c7d419d41dbb44e04480, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1647357940
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,7 +672,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1951964063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfc727d3b0499cc44a9d4097889d9465, type: 3}
+  m_Script: {fileID: 11500000, guid: a7cbd66a409e43d1922a41c5d4a29797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 659575328}

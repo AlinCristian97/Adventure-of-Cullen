@@ -1,24 +1,36 @@
-﻿using UnityEngine;
+﻿using StrategyPattern.Interfaces;
+using UnityEngine;
 
 public class PlayerActions : CharacterActions
 {
     private Player _player;
+    private IJumpBehaviour _jumpBehaviour;
 
-    public PlayerActions(Player player)
+    public PlayerActions(Player player, IJumpBehaviour jumpBehaviour)
     {
         _player = player;
+        _jumpBehaviour = jumpBehaviour;
     }
     
-    private Vector2 GetNewVelocity() => new Vector2(CalculateHorizontalVelocity(), _player.Stats.Direction.y);
+    private Vector2 GetNewVelocity() => new Vector2(CalculateHorizontalVelocity(), _player.Brain.Direction.y);
     
     private float CalculateHorizontalVelocity()
     {
-        float horizontalVelocity = _player.Stats.Direction.x * _player.Stats.MovementSpeed * Time.fixedDeltaTime;
+        float horizontalVelocity = _player.Brain.Direction.x * _player.Stats.MovementSpeed * Time.fixedDeltaTime;
         return horizontalVelocity;
     }
     
-    public override void Move(Transform transform)
+    public override void Move()
     {
         _player.Components.Rigidbody.velocity = GetNewVelocity();
+    }
+
+    public void TryJump()
+    {
+        if (_player.Brain.IsGrounded())
+        {
+            _jumpBehaviour.Jump(_player.Components.Rigidbody, _player.Stats.JumpForce);
+            PlayerAnimations.OnPlayerJump?.Invoke();
+        }
     }
 }

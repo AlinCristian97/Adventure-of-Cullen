@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 public class PlayerBrain : CharacterBrain
 {
     private Player _player;
-    private InputMaster _input;
+    public InputMaster Input { get; }
+    public Vector2 Direction { get; private set; }
+    
+    private LayerMask _whatIsGround;
 
     public PlayerBrain(Player player)
     {
         _player = player;
-        _input = new InputMaster();
-        _input.Enable();
+        _whatIsGround = LayerMask.GetMask("Ground");
+        Input = new InputMaster();
+        Input.Player.Jump.performed += _ => _player.Actions.TryJump();
     }
 
     public override void HandleDecisions()
@@ -19,13 +24,23 @@ public class PlayerBrain : CharacterBrain
 
     private void SetMovementDirection()
     {
-        _player.Stats.Direction = new Vector2(
+        Direction = new Vector2(
             GetHorizontalMovementInput(),
             _player.Components.Rigidbody.velocity.y);
     }
     
     private float GetHorizontalMovementInput()
     {
-        return _input.Player.Move.ReadValue<float>();
+        return Input.Player.Move.ReadValue<float>();
+    }
+    
+    public bool IsGrounded()
+    {
+        Bounds bounds = _player.Components.Collider.bounds;
+        
+        RaycastHit2D hit = Physics2D.BoxCast(bounds.center, bounds
+            .size, 0, Vector2.down, 0.1f, _whatIsGround);
+
+        return hit.collider != null;
     }
 }

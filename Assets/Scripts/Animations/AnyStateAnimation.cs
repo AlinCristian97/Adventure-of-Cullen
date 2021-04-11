@@ -7,7 +7,7 @@ using UnityEngine;
 public class AnyStateAnimation
 {
     public string Name { get; private set; }
-    public bool Active { get; private set; }
+    public bool Active { get; set; }
 
     public AnyStateAnimation(string name)
     {

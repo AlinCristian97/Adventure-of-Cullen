@@ -1,27 +1,33 @@
 using System;
 using StrategyPattern.Behaviours;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Player : Character<PlayerBrain, PlayerActions, PlayerStats, PlayerComponents, PlayerReferences>
+public class Player : Character
 {
-    // [SerializeField] private UnityEvent _onCharacterJump;
+    [field: SerializeField] public PlayerBrain Brain { get; private set; }
+    public PlayerActions Actions { get; private set; }
+    [field: SerializeField] public PlayerStats Stats { get; private set; }
+    [field: SerializeField] public PlayerComponents Components { get; private set; }
+    private PlayerReferences References { get; }
 
-    // private void Awake()
-    // {
-    //     _jumpBehaviour = new HumanJump();
-    // }
-    
-    // public override void PerformJump()
-    // {
-    //     base.PerformJump();
-    //     _onCharacterJump?.Invoke();
-    // }
+    private void OnEnable()
+    {
+        Brain.Input.Enable();
+    }
+
+    private void OnDisable()
+    {
+        Brain.Input.Disable();
+    }
+
+    private void Awake()
+    {
+        Brain = new PlayerBrain(this);
+        Actions = new PlayerActions(this, new HumanJump());
+    }
 
     private void Start()
     {
-        Brain = new PlayerBrain(this);
-        Actions = new PlayerActions(this);
         AddAnimations();
     }
     
@@ -32,14 +38,15 @@ public class Player : Character<PlayerBrain, PlayerActions, PlayerStats, PlayerC
 
     private void FixedUpdate()
     {
-        Actions.Move(transform);
+        Actions.Move();
     }
-
+    
     private void AddAnimations()
     {
         AnyStateAnimation[] animations = {
             new AnyStateAnimation("Idle"),
-            new AnyStateAnimation("Run")
+            new AnyStateAnimation("Run"),
+            new AnyStateAnimation("Jump")
         };
         
         Components.Animator.AddAnimations(animations);
