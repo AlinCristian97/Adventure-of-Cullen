@@ -23,6 +23,7 @@ public class PlayerAnimations : MonoBehaviour
     {
         HandleMovementAnimation();
         HandleJumpAnimation();
+        HandleWallSlideAnimation();
     }
 
     private void HandleMovementAnimation()
@@ -35,6 +36,11 @@ public class PlayerAnimations : MonoBehaviour
     {
         _animator.SetBool("isGrounded", _player.Brain.IsGrounded);
         _animator.SetFloat("yVelocity", _player.Brain.Direction.y);
+    }
+
+    private void HandleWallSlideAnimation()
+    {
+        _animator.SetBool("isWallSliding", _player.Brain.IsWallSliding);
     }
     
     private void FlipHorizontal()

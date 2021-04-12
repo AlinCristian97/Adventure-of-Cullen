@@ -32,6 +32,19 @@ public class PlayerActions
         _player.Components.Rigidbody.velocity = GetNewVelocity();
     }
 
+    public void HandleWallSlide()
+    {
+        if (_player.Brain.IsWallSliding)
+        {
+            // if (_player.Components.Rigidbody.velocity.y < -_player.Stats.WallSlideSpeed)
+            // {
+                _player.Components.Rigidbody.velocity = new Vector2(
+                    _player.Components.Rigidbody.velocity.x,
+                    -_player.Stats.WallSlideSpeed);
+            // }
+        }
+    }
+
     public void TryJump()
     {
         if (_player.Brain.IsGrounded)

@@ -241,10 +241,10 @@ TextureImporter:
     second: Adventurer_78
   - first:
       213: -2347643086923665144
-    second: Adventurer_79
+    second: WallSlide_1
   - first:
       213: -5955885492938334243
-    second: Adventurer_80
+    second: WallSlide_2
   - first:
       213: -740943613770052895
     second: Adventurer_81
@@ -2089,7 +2089,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_79
+      name: WallSlide_1
       rect:
         serializedVersion: 2
         x: 100
@@ -2110,7 +2110,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_80
+      name: WallSlide_2
       rect:
         serializedVersion: 2
         x: 150

@@ -28,11 +28,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Brain.HandleDecisions();
+        Brain.HandleInput();
+        Brain.CheckSurroundings();
     }
 
     private void FixedUpdate()
     {
         Actions.Move();
+        Actions.HandleWallSlide();
     }
 }

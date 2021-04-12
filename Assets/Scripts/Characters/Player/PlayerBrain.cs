@@ -8,6 +8,8 @@ public class PlayerBrain
     public Vector2 Direction { get; private set; }
     private LayerMask _whatIsGround;
     public bool IsGrounded { get; private set; }
+    private bool _isTouchingWall;
+    public bool IsWallSliding { get; private set; }
 
     public PlayerBrain(Player player)
     {
@@ -17,10 +19,28 @@ public class PlayerBrain
         Input.Player.Jump.performed += _ => _player.Actions.TryJump();
     }
 
-    public void HandleDecisions()
+    public void HandleInput()
     {
         SetMovementDirection();
+    }
+
+    public void CheckSurroundings()
+    {
         CheckGrounded();
+        CheckWallTouch();
+        CheckWallSliding();
+    }
+
+    private void CheckWallSliding()
+    {
+        if (_isTouchingWall && !IsGrounded && _player.Brain.Direction.y < 0)
+        {
+            IsWallSliding = true;
+        }
+        else
+        {
+            IsWallSliding = false;
+        }
     }
 
     private void SetMovementDirection()
@@ -35,18 +55,47 @@ public class PlayerBrain
         return Input.Player.Move.ReadValue<float>();
     }
     
-    public void CheckGrounded()
+    private void CheckGrounded()
     {
+        float checkDistance = 0.01f;
+        float horizontalSizeReductionFactor = 0.8f;
         Bounds bounds = _player.Components.Collider.bounds;
-        float scanSize = 0.01f;
+        Vector2 boxCastSize = new Vector2(bounds.size.x * horizontalSizeReductionFactor, bounds.size.y);
         
-        RaycastHit2D hit = Physics2D.BoxCast(bounds.center, bounds
-            .size, 0, Vector2.down, scanSize, _whatIsGround);
+        RaycastHit2D hit = Physics2D.BoxCast(bounds.center, boxCastSize, 0,
+            Vector2.down, checkDistance, _whatIsGround);
         
-        // Debug.DrawRay(bounds.center + new Vector3(bounds.extents.x, 0), Vector3.down * (bounds.extents.y + scanSize), Color.blue);
-        // Debug.DrawRay(bounds.center - new Vector3(bounds.extents.x, 0), Vector3.down * (bounds.extents.y + scanSize), Color.blue);
-        // Debug.DrawRay(bounds.center - new Vector3(bounds.extents.x, bounds.extents.y + scanSize), Vector3.right * (bounds.extents.x * 2), Color.blue);
+        // //Debug
+        // Debug.DrawRay(
+        //     bounds.center + new Vector3(bounds.extents.x * horizontalSizeReductionFactor, 0),
+        //     Vector3.down * (bounds.extents.y + checkDistance),
+        //     Color.blue);
+        //
+        // Debug.DrawRay(
+        //     bounds.center - new Vector3(bounds.extents.x * horizontalSizeReductionFactor, 0), 
+        //     Vector3.down * (bounds.extents.y + checkDistance),
+        //     Color.blue);
+        //
+        // Debug.DrawRay(
+        //     bounds.center - new Vector3(bounds.extents.x * horizontalSizeReductionFactor, bounds.extents.y + checkDistance),
+        //     Vector3.right * (bounds.extents.x),
+        //     Color.blue);
 
         IsGrounded = hit.collider != null;
+    }
+
+    private void CheckWallTouch()
+    {
+        float checkDistance = 0.01f;
+        Bounds bounds = _player.Components.Collider.bounds;
+
+        RaycastHit2D hit = Physics2D.Raycast(bounds.center, Vector2.right,
+            bounds.extents.x + checkDistance, _whatIsGround);
+        
+        
+        // //Debug
+        // Debug.DrawRay(bounds.center, new Vector2(bounds.extents.x + checkDistance, 0), Color.yellow);
+
+        _isTouchingWall = hit.collider != null;
     }
 }
