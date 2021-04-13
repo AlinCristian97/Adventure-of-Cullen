@@ -45,13 +45,16 @@ public class PlayerAnimations : MonoBehaviour
     
     private void FlipHorizontal()
     {
-        if (_player.Brain.Direction.x < 0)
+        if (!_player.Brain.IsWallSliding)
         {
-            _spriteRenderer.flipX = true;
-        }
-        else if (_player.Brain.Direction.x > 0)
-        {
-            _spriteRenderer.flipX = false;
+            if (_player.Brain.Direction.x < 0)
+            {
+                _spriteRenderer.flipX = true;
+            }
+            else if (_player.Brain.Direction.x > 0)
+            {
+                _spriteRenderer.flipX = false;
+            }
         }
     }
 }

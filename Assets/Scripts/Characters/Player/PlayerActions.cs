@@ -11,7 +11,7 @@ public class PlayerActions
     public PlayerActions(Player player)
     {
         _player = player;
-        _jumpBehaviour = new HumanJump();
+        _jumpBehaviour = new NormalJump();
     }
     
     public PlayerActions(Player player, IJumpBehaviour jumpBehaviour) : this(player)
@@ -29,7 +29,10 @@ public class PlayerActions
     
     public void Move()
     {
-        _player.Components.Rigidbody.velocity = GetNewVelocity();
+        if (!_player.Brain.IsWallSliding)
+        {
+            _player.Components.Rigidbody.velocity = GetNewVelocity();
+        }
     }
 
     public void HandleWallSlide()
@@ -47,9 +50,26 @@ public class PlayerActions
 
     public void TryJump()
     {
-        if (_player.Brain.IsGrounded)
+        if (_player.Brain.IsGrounded && !_player.Brain.IsWallSliding)
         {
             _jumpBehaviour.Jump(_player.Components.Rigidbody, _player.Stats.JumpForce);
+        }
+        
+        else if (_player.Brain.IsWallSliding && _player.Brain.Direction.x == 0)
+        {
+            _player.Brain.IsWallSliding = false;
+            Vector2 forceToAdd = new Vector2(_player.Brain.WallHopDirection.x, _player.Brain.WallHopDirection.y)
+                                 * _player.Stats.WallHopForce;
+            
+            _player.Components.Rigidbody.AddForce(forceToAdd, ForceMode2D.Impulse);
+        }
+        else if ((_player.Brain.IsWallSliding || _player.Brain.IsTouchingWall) && _player.Brain.Direction.x != 0)
+        {
+            _player.Brain.IsWallSliding = false;
+            Vector2 forceToAdd = new Vector2(_player.Brain.Direction.x, _player.Brain.WallJumpDirection.y)
+                                 * _player.Stats.WallJumpForce;
+            
+            _player.Components.Rigidbody.AddForce(forceToAdd, ForceMode2D.Impulse);
         }
     }
 }

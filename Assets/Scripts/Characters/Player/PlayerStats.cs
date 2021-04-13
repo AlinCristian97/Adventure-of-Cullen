@@ -7,4 +7,6 @@ public class PlayerStats
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public float WallSlideSpeed { get; private set; }
+    [field: SerializeField] public float WallHopForce { get; private set; }
+    [field: SerializeField] public float WallJumpForce { get; private set; }
 }
