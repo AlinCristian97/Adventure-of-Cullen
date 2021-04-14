@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace StrategyPattern.Behaviours
 {
-    public class HumanJump : IJumpBehaviour
+    public class NormalJump : IJumpBehaviour
     {
         public void Jump(Rigidbody2D rigidbody, float jumpForce)
         {
