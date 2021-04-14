@@ -52,24 +52,26 @@ public class PlayerActions
     {
         if (_player.Brain.IsGrounded && !_player.Brain.IsWallSliding)
         {
-            _jumpBehaviour.Jump(_player.Components.Rigidbody, _player.Stats.JumpForce);
+            NormalJump();
         }
         
-        else if (_player.Brain.IsWallSliding && _player.Brain.Direction.x == 0)
+        else if ((_player.Brain.IsWallSliding || _player.Brain.IsTouchingWall))
         {
-            _player.Brain.IsWallSliding = false;
-            Vector2 forceToAdd = new Vector2(_player.Brain.WallHopDirection.x, _player.Brain.WallHopDirection.y)
-                                 * _player.Stats.WallHopForce;
-            
-            _player.Components.Rigidbody.AddForce(forceToAdd, ForceMode2D.Impulse);
+            WallJump();
         }
-        else if ((_player.Brain.IsWallSliding || _player.Brain.IsTouchingWall) && _player.Brain.Direction.x != 0)
-        {
-            _player.Brain.IsWallSliding = false;
-            Vector2 forceToAdd = new Vector2(_player.Brain.Direction.x, _player.Brain.WallJumpDirection.y)
-                                 * _player.Stats.WallJumpForce;
+    }
+
+    public void NormalJump()
+    {
+        _jumpBehaviour.Jump(_player.Components.Rigidbody, _player.Stats.JumpForce);
+    }
+
+    public void WallJump()
+    {
+        _player.Brain.IsWallSliding = false;
+        Vector2 forceToAdd = new Vector2(_player.Brain.Direction.x, _player.Brain.WallJumpDirection.y)
+                             * _player.Stats.WallJumpForce;
             
-            _player.Components.Rigidbody.AddForce(forceToAdd, ForceMode2D.Impulse);
-        }
+        _player.Components.Rigidbody.AddForce(forceToAdd, ForceMode2D.Impulse);
     }
 }

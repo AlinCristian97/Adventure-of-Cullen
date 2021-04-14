@@ -12,7 +12,7 @@ public class PlayerBrain
     public bool IsWallSliding { get; set; }
     [field: SerializeField] public Vector2 WallHopDirection { get; private set; }
     [field: SerializeField] public Vector2 WallJumpDirection { get; private set; }
-    
+
     public PlayerBrain(Player player)
     {
         _player = player;

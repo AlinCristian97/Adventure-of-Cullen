@@ -406,7 +406,7 @@ MonoBehaviour:
     <MovementSpeed>k__BackingField: 300
     <JumpForce>k__BackingField: 15
     <WallSlideSpeed>k__BackingField: 1
-    <WallHopForce>k__BackingField: 35
+    <WallHopForce>k__BackingField: 30
     <WallJumpForce>k__BackingField: 20
   <Components>k__BackingField:
     <Rigidbody>k__BackingField: {fileID: 659575325}
@@ -437,8 +437,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106199341}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 5.38, y: 2.2, z: 0}
-  m_LocalScale: {x: 6, y: 1, z: 1}
+  m_LocalPosition: {x: 5.38, y: 5.9648, z: 0}
+  m_LocalScale: {x: 13.529513, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1647357941}
   m_RootOrder: 3
@@ -546,8 +546,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184036162}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 8.89, y: -0.64, z: 0}
-  m_LocalScale: {x: 6, y: 1, z: 1}
+  m_LocalPosition: {x: 8.89, y: 4.6274, z: 0}
+  m_LocalScale: {x: 16.534847, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1647357941}
   m_RootOrder: 1
