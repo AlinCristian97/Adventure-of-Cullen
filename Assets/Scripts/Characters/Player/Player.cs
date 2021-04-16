@@ -13,12 +13,12 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        Brain.Input.Enable();
+        // Brain.Input.Enable();
     }
 
     private void OnDisable()
     {
-        Brain.Input.Disable();
+        // Brain.Input.Disable();
     }
 
     private void Awake()

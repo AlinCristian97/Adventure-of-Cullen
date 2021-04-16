@@ -4,7 +4,7 @@
 public class PlayerBrain
 {
     private Player _player;
-    public InputMaster Input { get; }
+    // public InputMaster Input { get; }
     public Vector2 Direction { get; private set; }
     private LayerMask _whatIsGround;
     public bool IsGrounded { get; private set; }
@@ -21,13 +21,13 @@ public class PlayerBrain
         WallHopDirection = _player.Brain.WallHopDirection.normalized;
         WallJumpDirection = _player.Brain.WallJumpDirection.normalized;
         
-        Input = new InputMaster();
-        Input.Player.Jump.performed += _ => _player.Actions.TryJump();
+        // Input = new InputMaster();
+        // Input.Player.Jump.performed += _ => _player.Actions.TryJump();
     }
 
     public void HandleInput()
     {
-        SetMovementDirection();
+        // SetMovementDirection();
     }
 
     public void CheckSurroundings()
@@ -49,17 +49,17 @@ public class PlayerBrain
         }
     }
 
-    private void SetMovementDirection()
-    {
-        Direction = new Vector2(
-            GetHorizontalMovementInput(),
-            _player.Components.Rigidbody.velocity.y);
-    }
+    // private void SetMovementDirection()
+    // {
+    //     Direction = new Vector2(
+    //         GetHorizontalMovementInput(),
+    //         _player.Components.Rigidbody.velocity.y);
+    // }
     
-    private float GetHorizontalMovementInput()
-    {
-        return Input.Player.Move.ReadValue<float>();
-    }
+    // private float GetHorizontalMovementInput()
+    // {
+    //     // return Input.Player.Move.ReadValue<float>();
+    // }
     
     private void CheckGrounded()
     {
