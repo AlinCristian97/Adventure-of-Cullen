@@ -3,7 +3,7 @@ using StrategyPattern.Behaviours;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour
+public class PlayerOld : MonoBehaviour
 {
     [field: SerializeField] public PlayerBrain Brain { get; private set; }
     [field: SerializeField] public PlayerActions Actions { get; private set; }

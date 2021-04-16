@@ -1,10 +1,11 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimations : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    [FormerlySerializedAs("_player")] [SerializeField] private PlayerOld _playerOld;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
 
@@ -28,30 +29,30 @@ public class PlayerAnimations : MonoBehaviour
 
     private void HandleMovementAnimation()
     {
-        _animator.SetBool("isRunning", _player.Brain.Direction.x != 0 && _player.Brain.Direction.y == 0);
+        _animator.SetBool("isRunning", _playerOld.Brain.Direction.x != 0 && _playerOld.Brain.Direction.y == 0);
         FlipHorizontal();
     }
 
     private void HandleJumpAnimation()
     {
-        _animator.SetBool("isGrounded", _player.Brain.IsGrounded);
-        _animator.SetFloat("yVelocity", _player.Brain.Direction.y);
+        _animator.SetBool("isGrounded", _playerOld.Brain.IsGrounded);
+        _animator.SetFloat("yVelocity", _playerOld.Brain.Direction.y);
     }
 
     private void HandleWallSlideAnimation()
     {
-        _animator.SetBool("isWallSliding", _player.Brain.IsWallSliding);
+        _animator.SetBool("isWallSliding", _playerOld.Brain.IsWallSliding);
     }
     
     private void FlipHorizontal()
     {
-        if (!_player.Brain.IsWallSliding)
+        if (!_playerOld.Brain.IsWallSliding)
         {
-            if (_player.Brain.Direction.x < 0)
+            if (_playerOld.Brain.Direction.x < 0)
             {
                 _spriteRenderer.flipX = true;
             }
-            else if (_player.Brain.Direction.x > 0)
+            else if (_playerOld.Brain.Direction.x > 0)
             {
                 _spriteRenderer.flipX = false;
             }

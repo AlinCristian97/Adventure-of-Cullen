@@ -3,7 +3,7 @@
 [System.Serializable]
 public class PlayerBrain
 {
-    private Player _player;
+    private PlayerOld _playerOld;
     // public InputMaster Input { get; }
     public Vector2 Direction { get; private set; }
     private LayerMask _whatIsGround;
@@ -13,13 +13,13 @@ public class PlayerBrain
     [field: SerializeField] public Vector2 WallHopDirection { get; private set; }
     [field: SerializeField] public Vector2 WallJumpDirection { get; private set; }
 
-    public PlayerBrain(Player player)
+    public PlayerBrain(PlayerOld playerOld)
     {
-        _player = player;
+        _playerOld = playerOld;
         _whatIsGround = LayerMask.GetMask("Ground");
         
-        WallHopDirection = _player.Brain.WallHopDirection.normalized;
-        WallJumpDirection = _player.Brain.WallJumpDirection.normalized;
+        WallHopDirection = _playerOld.Brain.WallHopDirection.normalized;
+        WallJumpDirection = _playerOld.Brain.WallJumpDirection.normalized;
         
         // Input = new InputMaster();
         // Input.Player.Jump.performed += _ => _player.Actions.TryJump();
@@ -39,7 +39,7 @@ public class PlayerBrain
 
     private void CheckWallSliding()
     {
-        if (IsTouchingWall && !IsGrounded && _player.Brain.Direction.y < 0)
+        if (IsTouchingWall && !IsGrounded && _playerOld.Brain.Direction.y < 0)
         {
             IsWallSliding = true;
         }
@@ -65,7 +65,7 @@ public class PlayerBrain
     {
         float checkDistance = 0.01f;
         float horizontalSizeReductionFactor = 0.8f;
-        Bounds bounds = _player.Components.Collider.bounds;
+        Bounds bounds = _playerOld.Components.Collider.bounds;
         Vector2 boxCastSize = new Vector2(bounds.size.x * horizontalSizeReductionFactor, bounds.size.y);
         
         RaycastHit2D hit = Physics2D.BoxCast(bounds.center, boxCastSize, 0,
@@ -93,7 +93,7 @@ public class PlayerBrain
     private void CheckWallTouch()
     {
         float checkDistance = 0.01f;
-        Bounds bounds = _player.Components.Collider.bounds;
+        Bounds bounds = _playerOld.Components.Collider.bounds;
 
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(bounds.min.x - checkDistance, bounds.center.y), Vector2.right,
             bounds.size.x + checkDistance * 2, _whatIsGround);
