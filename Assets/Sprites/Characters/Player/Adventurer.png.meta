@@ -247,16 +247,16 @@ TextureImporter:
     second: WallSlide_2
   - first:
       213: -740943613770052895
-    second: Adventurer_81
+    second: WallClimb_1
   - first:
       213: -8782482879513778641
-    second: Adventurer_82
+    second: WallClimb_2
   - first:
       213: 6529164333525578851
-    second: Adventurer_83
+    second: WallClimb_4
   - first:
       213: -1304221456674123494
-    second: Adventurer_84
+    second: WallClimb_4
   - first:
       213: -2189875863552122099
     second: Adventurer_85
@@ -2131,7 +2131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_81
+      name: WallClimb_1
       rect:
         serializedVersion: 2
         x: 200
@@ -2152,7 +2152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_82
+      name: WallClimb_2
       rect:
         serializedVersion: 2
         x: 250
@@ -2173,7 +2173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_83
+      name: WallClimb_3
       rect:
         serializedVersion: 2
         x: 300
@@ -2194,7 +2194,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_84
+      name: WallClimb_4
       rect:
         serializedVersion: 2
         x: 0

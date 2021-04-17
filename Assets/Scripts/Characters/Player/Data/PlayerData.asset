@@ -17,7 +17,10 @@ MonoBehaviour:
   AmountOfJumps: 1
   CoyoteTime: 0.05
   VariableJumpHeightMultiplier: 0.2
-  GroundCheckRadius: 0.3
+  WallSlideVelocity: -0.7
+  WallClimbVelocity: 2
+  GroundCheckDistance: 0.05
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  WallCheckDistance: 0.05

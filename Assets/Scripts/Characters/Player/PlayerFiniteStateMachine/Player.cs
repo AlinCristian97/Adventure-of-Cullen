@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -19,12 +16,17 @@ public class Player : MonoBehaviour
     // public PlayerLandState LandState { get; private set; }
     [SerializeField] private PlayerData _playerData;
 
+    //test
+    public bool testWallTouch;
+    public bool testGrounded;
+
     #endregion
 
     #region Components
 
     public Animator Animator { get; private set; }
     public Rigidbody2D Rigidbody { get; private set; }
+    public Collider2D Collider { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
 
     #endregion
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour
         
         Animator = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody2D>();
+        Collider = GetComponent<CapsuleCollider2D>();
         InputHandler = GetComponent<PlayerInputHandler>();
     }
 
@@ -112,19 +115,54 @@ public class Player : MonoBehaviour
 
     public bool CheckIfGrounded()
     {
-        return Physics2D.OverlapCircle(_groundCheck.position,
-            _playerData.GroundCheckRadius,
-            _playerData.WhatIsGround);
+        float horizontalSizeReductionFactor = 0.8f;
+        Bounds bounds = Collider.bounds;
+        Vector2 boxCastSize = new Vector2(bounds.size.x * horizontalSizeReductionFactor, bounds.size.y);
+        
+        RaycastHit2D hit = Physics2D.BoxCast(bounds.center, boxCastSize, 0,
+            Vector2.down, _playerData.GroundCheckDistance, _playerData.WhatIsGround);
+        
+        // //Debug
+        // Debug.DrawRay(
+        //     bounds.center + new Vector3(bounds.extents.x * horizontalSizeReductionFactor, 0),
+        //     Vector3.down * (bounds.extents.y + _playerData.GroundCheckDistance),
+        //     Color.blue);
+        //
+        // Debug.DrawRay(
+        //     bounds.center - new Vector3(bounds.extents.x * horizontalSizeReductionFactor, 0), 
+        //     Vector3.down * (bounds.extents.y + _playerData.GroundCheckDistance),
+        //     Color.blue);
+        //
+        // Debug.DrawRay(
+        //     bounds.center - new Vector3(bounds.extents.x * horizontalSizeReductionFactor,
+        //         bounds.extents.y + _playerData.GroundCheckDistance),
+        //     Vector3.right * (bounds.size.x * horizontalSizeReductionFactor),
+        //     Color.blue);
+
+        //test
+        testGrounded = hit;
+        
+        return hit;
     }
 
     public bool CheckIfTouchingWall()
     {
-        return Physics2D.Raycast(_wallCheck.position,
-            Vector2.right * FacingDirection, 
-            _playerData.WallCheckDistance,
-            _playerData.WhatIsGround);
-    }
+        Bounds bounds = Collider.bounds;
 
+        RaycastHit2D hit = Physics2D.Raycast(bounds.center, Vector2.right * FacingDirection,
+            bounds.extents.x + _playerData.WallCheckDistance, _playerData.WhatIsGround);
+        
+        // //Debug
+        // Debug.DrawRay(bounds.center,
+        //     new Vector2((bounds.extents.x + _playerData.WallCheckDistance) * FacingDirection, 0),
+        //     Color.yellow);
+
+        //test
+        testWallTouch = hit;
+        
+        return hit;
+    }
+    
     #endregion
 
     #region Other Functions
@@ -140,5 +178,4 @@ public class Player : MonoBehaviour
     }
 
     #endregion
-    
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerOld : MonoBehaviour
 {
     [field: SerializeField] public PlayerBrain Brain { get; private set; }
-    [field: SerializeField] public PlayerActions Actions { get; private set; }
+    // [field: SerializeField] public PlayerActions Actions { get; private set; }
     [field: SerializeField] public PlayerStats Stats { get; private set; }
     [field: SerializeField] public PlayerComponents Components { get; private set; }
     [field: SerializeField] public PlayerReferences References { get; private set; }
@@ -24,7 +24,7 @@ public class PlayerOld : MonoBehaviour
     private void Awake()
     {
         Brain = new PlayerBrain(this);
-        Actions = new PlayerActions(this);
+        // Actions = new PlayerActions(this);
     }
 
     private void Update()
@@ -35,7 +35,7 @@ public class PlayerOld : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Actions.Move();
-        Actions.HandleWallSlide();
+        // Actions.Move();
+        // Actions.HandleWallSlide();
     }
 }

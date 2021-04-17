@@ -4,18 +4,24 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("Move State")]
-    public float MovementVelocity = 10f;
+    public float MovementVelocity;
     
     [Header("Jump State")]
-    public float JumpVelocity = 15f;
-    public int AmountOfJumps = 1;
+    public float JumpVelocity;
+    public int AmountOfJumps;
     
     [Header("Air State")]
-    public float CoyoteTime = 0.2f;
-    public float VariableJumpHeightMultiplier = 0.5f;
+    public float CoyoteTime;
+    public float VariableJumpHeightMultiplier;
+    
+    [Header("Wall Slide State")]
+    public float WallSlideVelocity;
+    
+    [Header("Wall Climb State")]
+    public float WallClimbVelocity;
     
     [Header("Check Variables")]
-    public float GroundCheckRadius = 0.3f;
+    public float GroundCheckDistance;
     public LayerMask WhatIsGround;
-    public float WallCheckDistance = 0.5f;
+    public float WallCheckDistance;
 }

@@ -149,8 +149,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366981172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.75, y: -4, z: 0}
-  m_LocalScale: {x: 38.426105, y: 1, z: 1}
+  m_LocalPosition: {x: -7.81, y: -4, z: 0}
+  m_LocalScale: {x: 13.59045, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1647357941}
   m_RootOrder: 0
@@ -912,6 +912,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2eb3a69a-3868-4605-9b13-11697e7691fa
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1884262444}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnGrabInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 47bc89e9-9cdd-4f4c-a1a5-cf71d4e559f6
+    m_ActionName: Player/Grab[/Keyboard/ctrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -925,7 +941,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884262441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.15, y: -2.9, z: 0}
+  m_LocalPosition: {x: -5.05, y: -2.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 510611822}
@@ -980,7 +996,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerData: {fileID: 11400000, guid: e2321568bcb5ed94aa25ffc5686450ac, type: 2}
+  testWallTouch: 0
+  testGrounded: 0
   _groundCheck: {fileID: 510611822}
+  _wallCheck: {fileID: 902879148}
 --- !u!212 &1884262448
 SpriteRenderer:
   m_ObjectHideFlags: 0
