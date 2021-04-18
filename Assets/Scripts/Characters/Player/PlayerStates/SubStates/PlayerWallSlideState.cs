@@ -7,12 +7,15 @@
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
-        Player.SetVelocityY(PlayerData.WallSlideVelocity);
 
-        if (GrabInput && InputY == 0)
+        if (!IsExitingState)
         {
-            StateMachine.ChangeState(Player.WallGrabState);
+            Player.SetVelocityY(PlayerData.WallSlideVelocity);
+
+            if (GrabInput && InputY == 0)
+            {
+                StateMachine.ChangeState(Player.WallGrabState);
+            } 
         }
     }
 }

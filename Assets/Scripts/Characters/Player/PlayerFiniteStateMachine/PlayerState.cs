@@ -11,7 +11,7 @@ public class PlayerState
     protected float StartTime;
     
     private string _animatorBoolName;
-    protected bool IsAnimationFinished;
+    protected bool IsExitingState; //TODO: Find another solution?
 
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animatorBoolName)
     {
@@ -28,7 +28,7 @@ public class PlayerState
         
         Player.Animator.SetBool(_animatorBoolName, true);
 
-        IsAnimationFinished = false;
+        IsExitingState = false;
         
         //test
         Debug.Log(this);
@@ -37,6 +37,8 @@ public class PlayerState
     public virtual void Exit()
     {
         Player.Animator.SetBool(_animatorBoolName, false);
+        
+        IsExitingState = true;
     }
     
     public virtual void LogicUpdate()
@@ -53,5 +55,7 @@ public class PlayerState
     
     public virtual void AnimationTrigger() { }
 
-    public virtual void AnimationFinishedTrigger() => IsAnimationFinished = true;
+    public virtual void AnimationFinishedTrigger()
+    {
+    }
 }

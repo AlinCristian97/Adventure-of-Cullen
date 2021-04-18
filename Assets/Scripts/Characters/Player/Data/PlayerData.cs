@@ -20,6 +20,11 @@ public class PlayerData : ScriptableObject
     [Header("Wall Climb State")]
     public float WallClimbVelocity;
     
+    [Header("Wall Jump State")]
+    public float WallJumpVelocity;
+    public float WallJumpTime;
+    public Vector2 WallJumpAngle;
+    
     [Header("Check Variables")]
     public float GroundCheckDistance;
     public LayerMask WhatIsGround;

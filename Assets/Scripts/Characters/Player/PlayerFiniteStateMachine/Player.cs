@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallGrabState WallGrabState { get; private set; }
     public PlayerWallClimbState WallClimbState { get; private set; }
+    public PlayerWallJumpState WallJumpState { get; private set; }
     // public PlayerLandState LandState { get; private set; }
     [SerializeField] private PlayerData _playerData;
 
@@ -58,6 +59,7 @@ public class Player : MonoBehaviour
         WallSlideState = new PlayerWallSlideState(this, StateMachine, _playerData, "wallSlide");
         WallGrabState = new PlayerWallGrabState(this, StateMachine, _playerData, "wallGrab");
         WallClimbState = new PlayerWallClimbState(this, StateMachine, _playerData, "wallClimb");
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData, "air");
         // LandState = new PlayerLandState(this, StateMachine, _playerData, "land");
         
         Animator = GetComponent<Animator>();
@@ -87,6 +89,14 @@ public class Player : MonoBehaviour
 
     #region Set Functions
 
+    public void SetVelocity(float velocity, Vector2 angle, int direction)
+    {
+        angle.Normalize();
+        _workspace.Set(angle.x * velocity * direction, angle.y * velocity);
+        Rigidbody.velocity = _workspace;
+        CurrentVelocity = _workspace; // Can be removed?
+    }
+    
     public void SetVelocityX(float velocity)
     {
         _workspace.Set(velocity, CurrentVelocity.y);
@@ -156,6 +166,24 @@ public class Player : MonoBehaviour
         // Debug.DrawRay(bounds.center,
         //     new Vector2((bounds.extents.x + _playerData.WallCheckDistance) * FacingDirection, 0),
         //     Color.yellow);
+
+        //test
+        testWallTouch = hit;
+        
+        return hit;
+    }
+
+    public bool CheckIfTouchingWallBack()
+    {
+        Bounds bounds = Collider.bounds;
+
+        RaycastHit2D hit = Physics2D.Raycast(bounds.center, Vector2.right * -FacingDirection,
+            bounds.extents.x + _playerData.WallCheckDistance, _playerData.WhatIsGround);
+        
+        // //Debug
+        // Debug.DrawRay(bounds.center,
+        //     new Vector2((bounds.extents.x + _playerData.WallCheckDistance) * -FacingDirection, 0),
+        //     Color.magenta);
 
         //test
         testWallTouch = hit;

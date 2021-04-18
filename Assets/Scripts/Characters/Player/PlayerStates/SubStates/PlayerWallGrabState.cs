@@ -26,15 +26,18 @@ public class PlayerWallGrabState : PlayerTouchingWallState
     {
         base.LogicUpdate();
         
-        HoldPosition();
+        if (!IsExitingState)
+        {
+            HoldPosition();
 
-        if (InputY > 0)
-        {
-            StateMachine.ChangeState(Player.WallClimbState);
-        }
-        else if (InputY < 0 || !GrabInput)
-        {
-            StateMachine.ChangeState(Player.WallSlideState);
+            if (InputY > 0)
+            {
+                StateMachine.ChangeState(Player.WallClimbState);
+            }
+            else if (InputY < 0 || !GrabInput)
+            {
+                StateMachine.ChangeState(Player.WallSlideState);
+            }
         }
     }
 
