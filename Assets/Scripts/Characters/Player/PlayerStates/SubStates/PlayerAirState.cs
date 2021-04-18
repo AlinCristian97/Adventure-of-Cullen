@@ -29,6 +29,11 @@ public class PlayerAirState : PlayerState
     public override void Exit()
     {
         base.Exit();
+
+        _oldIsTouchingWall = false;
+        _oldIsTouchingWallBack = false;
+        _isTouchingWall = false;
+        _isTouchingWallBack = false;
     }
 
     public override void LogicUpdate()
@@ -49,7 +54,7 @@ public class PlayerAirState : PlayerState
         {
             StateMachine.ChangeState(Player.IdleState);
         }
-        else if (_jumpInput && _isTouchingWall || _isTouchingWallBack || _wallJumpCoyoteTime)
+        else if (_jumpInput && (_isTouchingWall || _isTouchingWallBack || _wallJumpCoyoteTime))
         {
             StopWallJumpCoyoteTime();
             _isTouchingWall = Player.CheckIfTouchingWall();
