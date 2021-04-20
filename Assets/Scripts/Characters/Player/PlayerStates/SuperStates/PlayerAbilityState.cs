@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerAbilityState : PlayerState
 {
     protected bool IsAbilityDone;
-    private bool _isGrounded;
     
     public PlayerAbilityState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animatorBoolName) : base(player, stateMachine, playerData, animatorBoolName)
     {
@@ -21,12 +20,12 @@ public class PlayerAbilityState : PlayerState
         base.Exit();
     }
 
-    public override void LogicUpdate()
+    public override void Execute()
     {
-        base.LogicUpdate();
+        base.Execute();
         if (IsAbilityDone)
         {
-            if (_isGrounded && Player.CurrentVelocity.y < 0.01f)
+            if (IsGrounded && Player.CurrentVelocity.y < 0.01f)
             {
                 StateMachine.ChangeState(Player.IdleState);
             }
@@ -37,16 +36,9 @@ public class PlayerAbilityState : PlayerState
         }
     }
 
-    public override void PhysicsUpdate()
+    public override void ExecutePhysics()
     {
-        base.PhysicsUpdate();
+        base.ExecutePhysics();
         
-    }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
-
-        _isGrounded = Player.CheckIfGrounded();
     }
 }

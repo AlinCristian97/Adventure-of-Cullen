@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         CurrentVelocity = Rigidbody.velocity;
-        StateMachine.CurrentState.LogicUpdate();
+        StateMachine.CurrentState.Execute();
         
         //test
         // CheckIfTouchingLedge();
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        StateMachine.CurrentState.PhysicsUpdate();
+        StateMachine.CurrentState.ExecutePhysics();
     }
 
     #endregion
@@ -199,6 +199,8 @@ public class Player : MonoBehaviour
         
         return hit;
     }
+
+    
 
     //TODO: Check Touching Wall as BoxCast instead of Raycast?
     public bool CheckIfTouchingWall()

@@ -17,9 +17,9 @@ public class PlayerMoveState : PlayerGroundedState
         base.Exit();
     }
 
-    public override void LogicUpdate()
+    public override void Execute()
     {
-        base.LogicUpdate();
+        base.Execute();
         
         Player.CheckIfShouldFlip(InputX);
         
@@ -38,13 +38,8 @@ public class PlayerMoveState : PlayerGroundedState
         }
     }
 
-    public override void PhysicsUpdate()
+    public override void ExecutePhysics()
     {
-        base.PhysicsUpdate();
-    }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
+        base.ExecutePhysics();
     }
 }

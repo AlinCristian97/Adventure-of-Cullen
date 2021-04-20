@@ -16,15 +16,10 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         
         HoldPosition();
     }
-
-    public override void Exit()
+    
+    public override void Execute()
     {
-        base.Exit();
-    }
-
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
+        base.Execute();
         
         if (!IsExitingState)
         {
@@ -47,25 +42,5 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         
         Player.SetVelocityX(0f); // For cinemachine to not bug
         Player.SetVelocityY(0f); // For cinemachine to not bug
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
-
-    public override void AnimationTrigger()
-    {
-        base.AnimationTrigger();
-    }
-
-    public override void AnimationFinishedTrigger()
-    {
-        base.AnimationFinishedTrigger();
     }
 }

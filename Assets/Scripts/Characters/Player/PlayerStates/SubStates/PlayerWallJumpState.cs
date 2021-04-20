@@ -18,9 +18,9 @@ public class PlayerWallJumpState : PlayerAbilityState
         Player.JumpState.DecreaseAmountOfJumpsLeft();
     }
 
-    public override void LogicUpdate()
+    public override void Execute()
     {
-        base.LogicUpdate();
+        base.Execute();
         
         Player.Animator.SetFloat("yVelocity", Player.CurrentVelocity.y);
 

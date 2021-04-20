@@ -4,16 +4,35 @@ using UnityEngine;
 
 public class PlayerState
 {
+    // Keep?
     protected Player Player;
     protected PlayerStateMachine StateMachine;
     protected PlayerData PlayerData;
-
-    protected float StartTime;
     
+    // All Checks in one place
+        //-input
+    protected int InputX;
+    protected int InputY;
+    protected bool GrabInput;
+    protected bool JumpInput;
+
+        //-surroundings
+    protected bool IsGrounded;
+    protected bool IsTouchingWall;
+    protected bool IsTouchingLedge;
+    protected bool IsTouchingCeiling;
+
+        //-state
+    protected bool IsHanging;
+    protected bool IsClimbing;
+
+    // Keep?
+    protected float StartTime; // used for coyote effect
     protected bool IsAnimationFinished;
     private string _animatorBoolName;
     protected bool IsExitingState; //TODO: Find another solution?
 
+    // Initialize them in ctor?
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animatorBoolName)
     {
         Player = player;
@@ -24,7 +43,9 @@ public class PlayerState
 
     public virtual void Enter()
     {
-        DoChecks();
+        CheckInput(); //TODO: Can be deleted?
+        CheckSurroundings(); //TODO: Can be deleted?
+        
         StartTime = Time.time;
         
         Player.Animator.SetBool(_animatorBoolName, true);
@@ -32,7 +53,7 @@ public class PlayerState
         IsAnimationFinished = false;
         IsExitingState = false;
         
-        // //test
+        //test
         Debug.Log(this);
     }
 
@@ -43,18 +64,33 @@ public class PlayerState
         IsExitingState = true;
     }
     
-    public virtual void LogicUpdate()
+    public virtual void Execute()
     {
-        
+        CheckInput();
     }
     
-    public virtual void PhysicsUpdate()
+    public virtual void ExecutePhysics()
     {
-        DoChecks();
+        CheckSurroundings();
     }
 
-    public virtual void DoChecks() { }
+    private void CheckInput()
+    {
+        InputX = Player.InputHandler.NormalizedInputX;
+        InputY = Player.InputHandler.NormalizedInputY;
+        GrabInput = Player.InputHandler.GrabInput;
+        JumpInput = Player.InputHandler.JumpInput;
+    }
 
+    private void CheckSurroundings()
+    {
+        IsGrounded = Player.CheckIfGrounded();
+        IsTouchingWall = Player.CheckIfTouchingWall();
+        IsTouchingLedge = Player.CheckIfTouchingLedge();
+        IsTouchingCeiling = Player.CheckForCeiling();
+    }
+
+    //Keep them?
     public virtual void AnimationTrigger() { }
 
     public virtual void AnimationFinishedTrigger() => IsAnimationFinished = true;

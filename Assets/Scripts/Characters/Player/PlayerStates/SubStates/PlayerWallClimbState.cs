@@ -4,9 +4,9 @@
     {
     }
 
-    public override void LogicUpdate()
+    public override void Execute()
     {
-        base.LogicUpdate();
+        base.Execute();
 
         if (!IsExitingState)
         {

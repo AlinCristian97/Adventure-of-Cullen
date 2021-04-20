@@ -10,7 +10,6 @@ public class PlayerGroundedState : PlayerState
     private bool _isGrounded;
     private bool _isTouchingWall;
     private bool _isTouchingLedge;
-    protected bool IsTouchingCeiling;
     
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animatorBoolName) : base(player, stateMachine, playerData, animatorBoolName)
     {
@@ -29,9 +28,9 @@ public class PlayerGroundedState : PlayerState
         base.Exit();
     }
 
-    public override void LogicUpdate()
+    public override void Execute()
     {
-        base.LogicUpdate();
+        base.Execute();
 
         InputX = Player.InputHandler.NormalizedInputX;
         InputY = Player.InputHandler.NormalizedInputY;
@@ -54,18 +53,8 @@ public class PlayerGroundedState : PlayerState
         }
     }
 
-    public override void PhysicsUpdate()
+    public override void ExecutePhysics()
     {
-        base.PhysicsUpdate();
-    }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
-
-        _isGrounded = Player.CheckIfGrounded();
-        _isTouchingWall = Player.CheckIfTouchingWall();
-        _isTouchingLedge = Player.CheckIfTouchingLedge();
-        IsTouchingCeiling = Player.CheckForCeiling();
+        base.ExecutePhysics();
     }
 }
