@@ -3,11 +3,14 @@ using UnityEngine;
 public class PlayerGroundedState : PlayerState
 {
     protected int InputX;
+    protected int InputY;
     private bool _jumpInput;
     private bool _grabInput;
     
     private bool _isGrounded;
     private bool _isTouchingWall;
+    private bool _isTouchingLedge;
+    protected bool IsTouchingCeiling;
     
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animatorBoolName) : base(player, stateMachine, playerData, animatorBoolName)
     {
@@ -31,6 +34,7 @@ public class PlayerGroundedState : PlayerState
         base.LogicUpdate();
 
         InputX = Player.InputHandler.NormalizedInputX;
+        InputY = Player.InputHandler.NormalizedInputY;
         _jumpInput = Player.InputHandler.JumpInput;
         _grabInput = Player.InputHandler.GrabInput;
 
@@ -40,10 +44,11 @@ public class PlayerGroundedState : PlayerState
         }
         else if (!_isGrounded)
         {
-            Player.AirState.StartCoyoteTime();
-            StateMachine.ChangeState(Player.AirState);
+            Debug.Log("!isGrounded");
+            // Player.AirState.StartCoyoteTime();
+            // StateMachine.ChangeState(Player.AirState);
         }
-        else if (_isTouchingWall && _grabInput)
+        else if (_isTouchingWall && _grabInput && _isTouchingLedge)
         {
             StateMachine.ChangeState(Player.WallGrabState);
         }
@@ -60,5 +65,7 @@ public class PlayerGroundedState : PlayerState
 
         _isGrounded = Player.CheckIfGrounded();
         _isTouchingWall = Player.CheckIfTouchingWall();
+        _isTouchingLedge = Player.CheckIfTouchingLedge();
+        IsTouchingCeiling = Player.CheckForCeiling();
     }
 }

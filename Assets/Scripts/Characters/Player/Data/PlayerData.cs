@@ -25,6 +25,16 @@ public class PlayerData : ScriptableObject
     public float WallJumpTime;
     public Vector2 WallJumpAngle;
     
+    [Header("Ledge Climb State")]
+    public Vector2 StartOffset;
+    public Vector2 StopOffset;
+    
+    [Header("Crouch States")]
+    public float CrouchMovementVelocity;
+
+    public float CrouchColliderHeight;
+    public float StandColliderHeight;
+    
     [Header("Check Variables")]
     public float GroundCheckDistance;
     public LayerMask WhatIsGround;

@@ -16,16 +16,16 @@ TextureImporter:
     second: Idle_4
   - first:
       213: -4414101998160237499
-    second: Adventurer_4
+    second: CrouchIdle_1
   - first:
       213: -2277658883071168832
-    second: Adventurer_5
+    second: CrouchIdle_2
   - first:
       213: 1054123131133839117
-    second: Adventurer_6
+    second: CrouchIdle_3
   - first:
       213: 8741094074825527800
-    second: Adventurer_7
+    second: CrouchIdle_4
   - first:
       213: -8327724297079253722
     second: Run_1
@@ -91,31 +91,31 @@ TextureImporter:
     second: Adventurer_28
   - first:
       213: 3824729104003540711
-    second: Adventurer_29
+    second: LedgeHold_1
   - first:
       213: 3692505293852205859
-    second: Adventurer_30
+    second: LedgeHold_2
   - first:
       213: -3871878948576555267
-    second: Adventurer_31
+    second: LedgeHold_3
   - first:
       213: -3644788403994261523
-    second: Adventurer_32
+    second: LedgeHold_4
   - first:
       213: -5564941792321809330
-    second: Adventurer_33
+    second: LedgeClimb_1
   - first:
       213: -2625776249134421532
-    second: Adventurer_34
+    second: LedgeClimb_2
   - first:
       213: -2207305779164162182
-    second: Adventurer_35
+    second: LedgeClimb_3
   - first:
       213: -8066915760224758719
-    second: Adventurer_36
+    second: LedgeClimb_4
   - first:
       213: 4018950029110782202
-    second: Adventurer_37
+    second: LedgeClimb_5
   - first:
       213: -1995647395052029817
     second: Adventurer_38
@@ -514,7 +514,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_4
+      name: CrouchIdle_1
       rect:
         serializedVersion: 2
         x: 200
@@ -535,7 +535,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_5
+      name: CrouchIdle_2
       rect:
         serializedVersion: 2
         x: 250
@@ -556,7 +556,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_6
+      name: CrouchIdle_3
       rect:
         serializedVersion: 2
         x: 300
@@ -577,7 +577,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_7
+      name: CrouchIdle_4
       rect:
         serializedVersion: 2
         x: 0
@@ -1039,7 +1039,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_29
+      name: LedgeHold_1
       rect:
         serializedVersion: 2
         x: 50
@@ -1060,7 +1060,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_30
+      name: LedgeHold_2
       rect:
         serializedVersion: 2
         x: 100
@@ -1081,7 +1081,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_31
+      name: LedgeHold_3
       rect:
         serializedVersion: 2
         x: 150
@@ -1102,7 +1102,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_32
+      name: LedgeHold_4
       rect:
         serializedVersion: 2
         x: 200
@@ -1123,7 +1123,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_33
+      name: LedgeClimb_1
       rect:
         serializedVersion: 2
         x: 250
@@ -1144,7 +1144,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_34
+      name: LedgeClimb_2
       rect:
         serializedVersion: 2
         x: 300
@@ -1165,7 +1165,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_35
+      name: LedgeClimb_3
       rect:
         serializedVersion: 2
         x: 0
@@ -1186,7 +1186,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_36
+      name: LedgeClimb_4
       rect:
         serializedVersion: 2
         x: 50
@@ -1207,7 +1207,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adventurer_37
+      name: LedgeClimb_5
       rect:
         serializedVersion: 2
         x: 100

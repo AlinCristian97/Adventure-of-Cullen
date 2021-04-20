@@ -6,6 +6,7 @@ public class PlayerTouchingWallState : PlayerState
 {
     protected bool IsGrounded;
     protected bool IsTouchingWall;
+    protected bool IsTouchingLedge;
     protected bool GrabInput;
     protected bool JumpInput;
     protected int InputX;
@@ -47,6 +48,10 @@ public class PlayerTouchingWallState : PlayerState
         {
             StateMachine.ChangeState(Player.AirState);
         }
+        else if (IsTouchingWall && !IsTouchingLedge)
+        {
+            StateMachine.ChangeState(Player.LedgeClimbState);
+        }
     }
 
     public override void PhysicsUpdate()
@@ -60,6 +65,12 @@ public class PlayerTouchingWallState : PlayerState
 
         IsGrounded = Player.CheckIfGrounded();
         IsTouchingWall = Player.CheckIfTouchingWall();
+        IsTouchingLedge = Player.CheckIfTouchingLedge();
+
+        if (IsTouchingWall && !IsTouchingLedge)
+        {
+            Player.LedgeClimbState.SetDetectedPosition(Player.transform.position);
+        }
     }
 
     public override void AnimationTrigger()

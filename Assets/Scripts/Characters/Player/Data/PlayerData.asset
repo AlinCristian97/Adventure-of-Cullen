@@ -22,6 +22,11 @@ MonoBehaviour:
   WallJumpVelocity: 15
   WallJumpTime: 0.4
   WallJumpAngle: {x: 1, y: 2}
+  StartOffset: {x: 0.05, y: 0.35}
+  StopOffset: {x: 0.5, y: 0.25}
+  CrouchMovementVelocity: 5
+  CrouchColliderHeight: 0.6
+  StandColliderHeight: 0.9
   GroundCheckDistance: 0.05
   WhatIsGround:
     serializedVersion: 2

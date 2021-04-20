@@ -10,6 +10,7 @@ public class PlayerState
 
     protected float StartTime;
     
+    protected bool IsAnimationFinished;
     private string _animatorBoolName;
     protected bool IsExitingState; //TODO: Find another solution?
 
@@ -27,10 +28,11 @@ public class PlayerState
         StartTime = Time.time;
         
         Player.Animator.SetBool(_animatorBoolName, true);
-
+        
+        IsAnimationFinished = false;
         IsExitingState = false;
         
-        //test
+        // //test
         Debug.Log(this);
     }
 
@@ -52,10 +54,8 @@ public class PlayerState
     }
 
     public virtual void DoChecks() { }
-    
+
     public virtual void AnimationTrigger() { }
 
-    public virtual void AnimationFinishedTrigger()
-    {
-    }
+    public virtual void AnimationFinishedTrigger() => IsAnimationFinished = true;
 }
