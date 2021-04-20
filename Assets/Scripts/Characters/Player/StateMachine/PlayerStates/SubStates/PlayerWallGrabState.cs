@@ -3,8 +3,8 @@
 public class PlayerWallGrabState : PlayerTouchingWallState
 {
     private Vector2 _holdPosition;
-    
-    public PlayerWallGrabState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animatorBoolName) : base(player, stateMachine, playerData, animatorBoolName)
+
+    public PlayerWallGrabState(Player player) : base(player)
     {
     }
 
@@ -13,25 +13,25 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         base.Enter();
 
         _holdPosition = Player.transform.position;
-        
+
         HoldPosition();
     }
-    
+
     public override void Execute()
     {
         base.Execute();
-        
+
         if (!IsExitingState)
         {
             HoldPosition();
 
             if (InputY > 0)
             {
-                StateMachine.ChangeState(Player.WallClimbState);
+                StateMachine.ChangeState(Player.States.WallClimbState);
             }
             else if (InputY < 0 || !GrabInput)
             {
-                StateMachine.ChangeState(Player.WallSlideState);
+                StateMachine.ChangeState(Player.States.WallSlideState);
             }
         }
     }
@@ -39,7 +39,7 @@ public class PlayerWallGrabState : PlayerTouchingWallState
     private void HoldPosition()
     {
         Player.transform.position = _holdPosition;
-        
+
         Player.SetVelocityX(0f); // For cinemachine to not bug
         Player.SetVelocityY(0f); // For cinemachine to not bug
     }

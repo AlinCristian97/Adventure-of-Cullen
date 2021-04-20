@@ -11,26 +11,26 @@ public class PlayerLedgeClimbState : PlayerState
 
     private int InputX;
     private int InputY;
-    
-    public PlayerLedgeClimbState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animatorBoolName) : base(player, stateMachine, playerData, animatorBoolName)
+
+    public PlayerLedgeClimbState(Player player) : base(player)
     {
     }
 
     public void SetDetectedPosition(Vector2 position) => _detectedPosition = position;
-   
+
     public override void Enter()
     {
         base.Enter();
-        
+
         Player.SetVelocityZero();
         Player.transform.position = _detectedPosition;
         _cornerPosition = Player.DetermineCornerPosition();
-        
-        _startPosition.Set(_cornerPosition.x - (Player.FacingDirection * PlayerData.StartOffset.x),
-            _cornerPosition.y - PlayerData.StartOffset.y);
-        
-        _stopPosition.Set(_cornerPosition.x + (Player.FacingDirection * PlayerData.StopOffset.x),
-            _cornerPosition.y + PlayerData.StopOffset.y);
+
+        _startPosition.Set(_cornerPosition.x - (Player.FacingDirection * Player.Data.StartOffset.x),
+            _cornerPosition.y - Player.Data.StartOffset.y);
+
+        _stopPosition.Set(_cornerPosition.x + (Player.FacingDirection * Player.Data.StopOffset.x),
+            _cornerPosition.y + Player.Data.StopOffset.y);
 
         Player.transform.position = _startPosition;
     }
@@ -51,16 +51,16 @@ public class PlayerLedgeClimbState : PlayerState
     public override void Execute()
     {
         base.Execute();
-    
+
         if (IsAnimationFinished)
         {
             if (_ledgeHasCeiling)
             {
-                StateMachine.ChangeState(Player.CrouchIdleState);
+                StateMachine.ChangeState(Player.States.CrouchIdleState);
             }
             else
             {
-                StateMachine.ChangeState(Player.IdleState);
+                StateMachine.ChangeState(Player.States.IdleState);
             }
         }
         else
@@ -68,7 +68,7 @@ public class PlayerLedgeClimbState : PlayerState
             InputX = Player.InputHandler.NormalizedInputX;
             InputY = Player.InputHandler.NormalizedInputY;
             JumpInput = Player.InputHandler.JumpInput;
-        
+
             Player.SetVelocityZero();
             Player.transform.position = _startPosition;
 
@@ -76,29 +76,30 @@ public class PlayerLedgeClimbState : PlayerState
             {
                 CheckCeilingLedge();
                 IsClimbing = true;
-                Player.Animator.SetBool("climbLedge", true);
+                Player.Components.Animator.SetBool("climbLedge", true);
             }
             else if (InputY == -1 && IsHanging && !IsClimbing)
             {
-                StateMachine.ChangeState(Player.AirState);
+                StateMachine.ChangeState(Player.States.AirState);
             }
             else if (JumpInput && !IsClimbing)
             {
-                Player.WallJumpState.DetermineWallJumpDirection(true);
-                StateMachine.ChangeState(Player.WallJumpState);
+                Player.States.WallJumpState.DetermineWallJumpDirection(true);
+                StateMachine.ChangeState(Player.States.WallJumpState);
             }
         }
     }
-    
+
     private void CheckCeilingLedge()
     {
         RaycastHit2D hit = Physics2D.Raycast(_cornerPosition + (Vector2.up * 0.015f)
                                                              + (Vector2.right * (Player.FacingDirection * 0.35f)),
-            Vector2.up, PlayerData.StandColliderHeight, PlayerData.WhatIsGround);
-        
+            Vector2.up, Player.Data.StandColliderHeight, Player.Data.WhatIsGround);
+
         //Debug
         Debug.DrawRay(_cornerPosition + (Vector2.up * 0.015f)
-                                      + (Vector2.right * (Player.FacingDirection * 0.35f)), Vector2.up * PlayerData.StandColliderHeight, Color.magenta);
+                                      + (Vector2.right * (Player.FacingDirection * 0.35f)),
+            Vector2.up * Player.Data.StandColliderHeight, Color.magenta);
 
         _ledgeHasCeiling = hit;
     }
@@ -113,7 +114,7 @@ public class PlayerLedgeClimbState : PlayerState
     public override void AnimationFinishedTrigger()
     {
         base.AnimationFinishedTrigger();
-        
-        Player.Animator.SetBool("climbLedge", false);
+
+        Player.Components.Animator.SetBool("climbLedge", false);
     }
 }

@@ -4,7 +4,7 @@ public class PlayerWallJumpState : PlayerAbilityState
 {
     private int _wallJumpDirection;
 
-    public PlayerWallJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animatorBoolName) : base(player, stateMachine, playerData, animatorBoolName)
+    public PlayerWallJumpState(Player player) : base(player)
     {
     }
 
@@ -12,19 +12,17 @@ public class PlayerWallJumpState : PlayerAbilityState
     {
         base.Enter();
         Player.InputHandler.UseJumpInput();
-        Player.JumpState.ResetAmountOfJumpsLeft();
-        Player.SetVelocity(PlayerData.WallJumpVelocity, PlayerData.WallJumpAngle, _wallJumpDirection);
+        Player.SetVelocity(Player.Data.WallJumpVelocity, Player.Data.WallJumpAngle, _wallJumpDirection);
         Player.CheckIfShouldFlip(_wallJumpDirection);
-        Player.JumpState.DecreaseAmountOfJumpsLeft();
     }
 
     public override void Execute()
     {
         base.Execute();
-        
-        Player.Animator.SetFloat("yVelocity", Player.CurrentVelocity.y);
 
-        if (Time.time >= StartTime + PlayerData.WallJumpTime)
+        Player.Components.Animator.SetFloat("yVelocity", Player.CurrentVelocity.y);
+
+        if (Time.time >= StartTime + Player.Data.WallJumpTime)
         {
             IsAbilityDone = true;
         }

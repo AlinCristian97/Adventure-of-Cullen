@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerState
+public abstract class PlayerState
 {
     // Keep?
     protected Player Player;
     protected PlayerStateMachine StateMachine;
-    protected PlayerData PlayerData;
     
     // All Checks in one place
         //-input
@@ -33,12 +32,10 @@ public class PlayerState
     protected bool IsExitingState; //TODO: Find another solution?
 
     // Initialize them in ctor?
-    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animatorBoolName)
+    public PlayerState(Player player)
     {
         Player = player;
-        StateMachine = stateMachine;
-        PlayerData = playerData;
-        _animatorBoolName = animatorBoolName;
+        StateMachine = Player.StateMachine;
     }
 
     public virtual void Enter()
@@ -48,7 +45,7 @@ public class PlayerState
         
         StartTime = Time.time;
         
-        Player.Animator.SetBool(_animatorBoolName, true);
+        Player.Components.Animator.SetBool(_animatorBoolName, true);
         
         IsAnimationFinished = false;
         IsExitingState = false;
@@ -59,7 +56,7 @@ public class PlayerState
 
     public virtual void Exit()
     {
-        Player.Animator.SetBool(_animatorBoolName, false);
+        Player.Components.Animator.SetBool(_animatorBoolName, false);
         
         IsExitingState = true;
     }

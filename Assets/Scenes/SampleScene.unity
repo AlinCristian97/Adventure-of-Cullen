@@ -933,12 +933,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee35cfbce3ef094cbc1294864cf25d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Data>k__BackingField: {fileID: 11400000, guid: e2321568bcb5ed94aa25ffc5686450ac, type: 2}
   _playerData: {fileID: 11400000, guid: e2321568bcb5ed94aa25ffc5686450ac, type: 2}
-  testWallTouch: 0
-  testGrounded: 0
-  testLedgeTouch: 0
-  testCeiling: 0
-  testLedgeCeiling: 0
+  testGrabInput: 0
+  testJumpInput: 0
+  testIsGrounded: 0
+  testIsTouchingWall: 0
+  testIsTouchingLedge: 0
+  testIsTouchingCeiling: 0
+  testCurrentState: 
 --- !u!212 &1884262448
 SpriteRenderer:
   m_ObjectHideFlags: 0

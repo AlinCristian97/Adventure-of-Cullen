@@ -8,8 +8,7 @@ public class PlayerData : ScriptableObject
     
     [Header("Jump State")]
     public float JumpVelocity;
-    public int AmountOfJumps;
-    
+
     [Header("Air State")]
     public float CoyoteTime;
     public float VariableJumpHeightMultiplier;
