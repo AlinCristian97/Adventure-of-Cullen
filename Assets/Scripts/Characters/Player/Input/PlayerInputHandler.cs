@@ -1,70 +1,69 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputHandler : MonoBehaviour
+namespace Player
 {
-    private Vector2 RawMovementInput { get; set; }
-    public int NormalizedInputX { get; private set; }
-    public int NormalizedInputY { get; private set; }
-    public bool JumpInput { get; private set; }
-    public bool JumpInputStop { get; private set; }
-    public bool GrabInput { get; private set; }
-    [SerializeField] private float _inputHoldTime;
-
-    private float _jumpInputStartTime;
-
-    private void Update()
+    public class PlayerInputHandler : MonoBehaviour
     {
-        CheckJumpInputHoldTime();
-    }
+        private Vector2 RawMovementInput { get; set; }
+        public int NormalizedInputX { get; private set; }
+        public int NormalizedInputY { get; private set; }
+        public bool JumpInput { get; private set; }
+        public bool JumpInputStop { get; private set; }
+        public bool GrabInput { get; private set; }
+        [SerializeField] private float _inputHoldTime;
 
-    public void OnMoveInput(InputAction.CallbackContext context)
-    {
-        RawMovementInput = context.ReadValue<Vector2>();
+        private float _jumpInputStartTime;
 
-        // Get rid of Y component of RawMovementInput
-        NormalizedInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-        NormalizedInputY = (int)(RawMovementInput * Vector2.up).normalized.y;
-    }
+        private void Update()
+        {
+            CheckJumpInputHoldTime();
+        }
+
+        public void OnMoveInput(InputAction.CallbackContext context)
+        {
+            RawMovementInput = context.ReadValue<Vector2>();
+
+            NormalizedInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
+            NormalizedInputY = (int)(RawMovementInput * Vector2.up).normalized.y;
+        }
     
-    public void OnJumpInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void OnJumpInput(InputAction.CallbackContext context)
         {
-            JumpInput = true;
-            JumpInputStop = false;
-            _jumpInputStartTime = Time.time;
+            if (context.started)
+            {
+                JumpInput = true;
+                JumpInputStop = false;
+                _jumpInputStartTime = Time.time;
+            }
+
+            if (context.canceled)
+            {
+                JumpInputStop = true;
+            }
         }
 
-        if (context.canceled)
+        public void OnGrabInput(InputAction.CallbackContext context)
         {
-            JumpInputStop = true;
+            if (context.started)
+            {
+                GrabInput = true;
+            }
+
+            if (context.canceled)
+            {
+                GrabInput = false;
+            }
         }
-    }
 
-    public void OnGrabInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        public void UseJumpInput() => JumpInput = false;
+
+        private void CheckJumpInputHoldTime()
         {
-            GrabInput = true;
-        }
-
-        if (context.canceled)
-        {
-            GrabInput = false;
-        }
-    }
-
-    public void UseJumpInput() => JumpInput = false;
-
-    private void CheckJumpInputHoldTime()
-    {
-        if (Time.time >= _jumpInputStartTime + _inputHoldTime)
-        {
-            JumpInput = false;
+            if (Time.time >= _jumpInputStartTime + _inputHoldTime)
+            {
+                JumpInput = false;
+            }
         }
     }
 }

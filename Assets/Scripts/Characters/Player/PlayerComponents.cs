@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 
-public class PlayerComponents
+namespace Player
 {
-    public Animator Animator { get; }
-    public Rigidbody2D Rigidbody { get; }
-    public CapsuleCollider2D Collider { get; }
-
-    public PlayerComponents(Rigidbody2D rigidbody, CapsuleCollider2D collider, Animator animator)
+    public class PlayerComponents
     {
-        Rigidbody = rigidbody;
-        Collider = collider;
-        Animator = animator;
+        public Animator Animator { get; }
+        public Rigidbody2D Rigidbody { get; }
+        public CapsuleCollider2D Collider { get; }
+
+        public PlayerComponents(Rigidbody2D rigidbody, CapsuleCollider2D collider, Animator animator)
+        {
+            Rigidbody = rigidbody;
+            Collider = collider;
+            Animator = animator;
+        }
     }
 }
