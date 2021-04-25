@@ -11,13 +11,8 @@ namespace Common.Modifiers
             _rigidbody = rigidbody;
         }
         
-        //TODO: Improve overall readability
-        
-        public void SetVelocityZero()
-        {
-            _rigidbody.velocity = Vector2.zero;
-        }
-    
+        public void SetVelocityZero() => _rigidbody.velocity = Vector2.zero;
+
         public void SetVelocityWallJump(float velocity, Vector2 angle, int direction)
         {
             angle.Normalize();
@@ -28,16 +23,16 @@ namespace Common.Modifiers
     
         public void SetVelocityX(float velocity)
         {
-            Vector2 newVelocity = new Vector2(velocity, _rigidbody.velocity.y);
+            Vector2 newVelocityX = new Vector2(velocity, _rigidbody.velocity.y);
         
-            _rigidbody.velocity = newVelocity;
+            _rigidbody.velocity = newVelocityX;
         }
 
         public void SetVelocityY(float velocity)
         {
-            Vector2 newVelocity = new Vector2(_rigidbody.velocity.x, velocity);
+            Vector2 newVelocityY = new Vector2(_rigidbody.velocity.x, velocity);
         
-            _rigidbody.velocity = newVelocity;
+            _rigidbody.velocity = newVelocityY;
         }
     }
 }

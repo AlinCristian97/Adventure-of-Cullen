@@ -18,68 +18,139 @@ namespace Player
             return shouldFlip;
         }
 
-        public bool CheckGrounded() //TODO: Improve to start at the bottom of the collider
+        public bool CheckGrounded()
         {
-            float horizontalSizeReductionFactor = 0.8f;
+            //TODO: add VerticalWidth to Scriptableobject
+
+            const float verticalWidth = 0.8f;
             Bounds bounds = _player.Components.Collider.bounds;
-            Vector2 boxCastSize = new Vector2(bounds.size.x * horizontalSizeReductionFactor, bounds.size.y);
+            
+            Vector3 castOrigin = new Vector2(bounds.center.x, bounds.min.y);
+            Vector2 castSize = new Vector2(
+                bounds.size.x * verticalWidth,
+                _player.ChecksData._groundCheckDistance);
+            const float castDistance = 0f;
         
-            RaycastHit2D hit = Physics2D.BoxCast(bounds.center, boxCastSize, 0,
-                Vector2.down, _player.ChecksData._groundCheckDistance, _player.ChecksData._whatIsGround);
-        
-            // //Debug
-            // Debug.DrawRay(
-            //     bounds.center + new Vector3(bounds.extents.x * horizontalSizeReductionFactor, 0),
-            //     Vector3.down * (bounds.extents.y + _player.ChecksData._groundCheckDistance),
-            //     Color.blue);
-            //
-            // Debug.DrawRay(
-            //     bounds.center - new Vector3(bounds.extents.x * horizontalSizeReductionFactor, 0), 
-            //     Vector3.down * (bounds.extents.y + _player.ChecksData._groundCheckDistance),
-            //     Color.blue);
-            //
-            // Debug.DrawRay(
-            //     bounds.center - new Vector3(bounds.extents.x * horizontalSizeReductionFactor,
-            //         bounds.extents.y + _player.ChecksData._groundCheckDistance),
-            //     Vector3.right * (bounds.size.x * horizontalSizeReductionFactor),
-            //     Color.blue);
-        
+            RaycastHit2D hit = Physics2D.BoxCast(castOrigin, castSize, 0,
+                Vector2.down, castDistance, _player.ChecksData._whatIsGround);
+
+            // Debug
+            DrawBoxCast();
+            void DrawBoxCast()
+            {
+                float halfGroundCheckDistance = _player.ChecksData._groundCheckDistance / 2;
+                float halfCastSizeY = castSize.y / 2f;
+                float drawDistance = halfCastSizeY + castDistance;
+                
+                // Horizontals
+                    // Bottom-right
+                Debug.DrawRay(
+                    castOrigin + new Vector3(bounds.extents.x * verticalWidth, 0),
+                    Vector3.down * drawDistance,
+                    Color.blue);
+                
+                    // Bottom-left
+                Debug.DrawRay(
+                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, 0), 
+                    Vector3.down * drawDistance,
+                    Color.blue);
+                
+                    // Top-right
+                Debug.DrawRay(
+                    castOrigin + new Vector3(bounds.extents.x * verticalWidth, 0),
+                    Vector3.up * halfGroundCheckDistance,
+                    Color.blue);
+            
+                    // Top-left
+                Debug.DrawRay(
+                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, 0), 
+                    Vector3.up * halfGroundCheckDistance,
+                    Color.blue);
+            
+                // Top and Bottom
+                    // Bottom
+                Debug.DrawRay(
+                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, drawDistance),
+                    Vector3.right * (bounds.size.x * verticalWidth),
+                    Color.blue);
+                
+                    // Top
+                Debug.DrawRay(
+                    castOrigin + new Vector3(bounds.extents.x * verticalWidth, halfGroundCheckDistance),
+                    Vector3.left * (bounds.size.x * verticalWidth),
+                    Color.blue);
+            }
+            
             return hit;
         }
     
         public bool CheckCeiling()
         {
-            //TODO: Improve code Separate debug into a separate function! Why is it /4 for debug?
-            float horizontalSizeReductionFactor = 0.8f;
+            //TODO: add VerticalWidth to Scriptableobject
+            const float verticalWidth = 0.8f;
             Bounds bounds = _player.Components.Collider.bounds;
-            Vector2 boxCastSize = new Vector2(bounds.size.x * horizontalSizeReductionFactor, bounds.size.y / 2);
+            
+            Vector3 castOrigin = new Vector2(bounds.center.x, bounds.max.y);
+            Vector2 castSize = new Vector2(
+                bounds.size.x * verticalWidth,
+                _player.ChecksData._ceilingCheckDistance);
+            const float castDistance = 0f;
+
+            RaycastHit2D hit = Physics2D.BoxCast(castOrigin, castSize, 0,
+                Vector2.up, castDistance, _player.ChecksData._whatIsGround);
         
-            RaycastHit2D hit = Physics2D.BoxCast(new Vector2(bounds.center.x, bounds.max.y), boxCastSize, 0,
-                Vector2.up, _player.ChecksData._groundCheckDistance, _player.ChecksData._whatIsGround);
-        
-            // //Debug
-            // Debug.DrawRay(
-            //     new Vector3(bounds.center.x, bounds.max.y) + new Vector3(bounds.extents.x * horizontalSizeReductionFactor, 0),
-            //     Vector2.up * (bounds.size.y / 4 + _playerData.GroundCheckDistance),
-            //     Color.red);
-            //
-            // Debug.DrawRay(
-            //     new Vector3(bounds.center.x, bounds.max.y) - new Vector3(bounds.extents.x * horizontalSizeReductionFactor, 0), 
-            //     Vector2.up * (bounds.size.y / 4 + _playerData.GroundCheckDistance),
-            //     Color.red);
-            //
-            // Debug.DrawRay(
-            //     new Vector3(bounds.center.x, bounds.max.y) + new Vector3(bounds.extents.x * horizontalSizeReductionFactor,
-            //         bounds.size.y / 4 + _playerData.GroundCheckDistance),
-            //     Vector2.left * (bounds.size.x * horizontalSizeReductionFactor),
-            //     Color.red);
-        
+            // Debug
+            DrawBoxCast();
+            void DrawBoxCast()
+            {
+                float halfGroundCheckDistance = _player.ChecksData._groundCheckDistance / 2;
+                float halfCastSizeY = castSize.y / 2f;
+                float drawDistance = halfCastSizeY + castDistance;
+
+                // Horizontals
+                    // Bottom-right
+                Debug.DrawRay(
+                    castOrigin + new Vector3(bounds.extents.x * verticalWidth, 0),
+                    Vector3.up * drawDistance,
+                    Color.red);
+
+                    // Bottom-left
+                Debug.DrawRay(
+                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, 0),
+                    Vector3.up * drawDistance,
+                    Color.red);
+                
+                    // Top-right
+                Debug.DrawRay(
+                    castOrigin + new Vector3(bounds.extents.x * verticalWidth, 0),
+                    Vector3.down * halfGroundCheckDistance,
+                    Color.red);
+            
+                    // Top-left
+                Debug.DrawRay(
+                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, 0), 
+                    Vector3.down * halfGroundCheckDistance,
+                    Color.red);
+
+                            
+                // Top and Bottom
+                    // Bottom
+                Debug.DrawRay(
+                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, drawDistance),
+                    Vector2.right * (bounds.size.x * verticalWidth),
+                    Color.red);
+                
+                    // Top
+                    Debug.DrawRay(
+                        castOrigin + new Vector3(bounds.extents.x * verticalWidth, drawDistance),
+                        Vector2.left * (bounds.size.x * verticalWidth),
+                        Color.red);
+            }
+
             return hit;
         }
 
-    
-
-        //TODO: Check Touching Wall as BoxCast instead of Raycast?
+        //TODO: Check Touching Wall as BoxCast instead of Raycast? With smaller height
         public bool CheckWall()
         {
             //TODO: Improve code Separate debug into a separate function

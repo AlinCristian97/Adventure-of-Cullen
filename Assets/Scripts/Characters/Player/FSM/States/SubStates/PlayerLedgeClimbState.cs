@@ -116,8 +116,8 @@ namespace Player.FSM.States
 
             Player.Components.Animator.SetBool("climbLedge", false);
         }
-        
-        public Vector2 GetLedgeCornerPosition()
+
+        private Vector2 GetLedgeCornerPosition()
         {
             //TODO: Improve code readability. Fix "Magic" Numbers
             float offset = 1.5f;
