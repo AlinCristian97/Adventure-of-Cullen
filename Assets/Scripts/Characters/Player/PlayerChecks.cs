@@ -20,16 +20,14 @@ namespace Player
 
         public bool CheckGrounded()
         {
-            //TODO: add VerticalWidth to Scriptableobject
-
-            const float verticalWidth = 0.8f;
             Bounds bounds = _player.Components.Collider.bounds;
             
             Vector3 castOrigin = new Vector2(bounds.center.x, bounds.min.y);
             Vector2 castSize = new Vector2(
-                bounds.size.x * verticalWidth,
+                _player.ChecksData._groundCheckWidth,
                 _player.ChecksData._groundCheckDistance);
             const float castDistance = 0f;
+            Color castColor = Color.blue;
         
             RaycastHit2D hit = Physics2D.BoxCast(castOrigin, castSize, 0,
                 Vector2.down, castDistance, _player.ChecksData._whatIsGround);
@@ -38,63 +36,68 @@ namespace Player
             DrawBoxCast();
             void DrawBoxCast()
             {
-                float halfGroundCheckDistance = _player.ChecksData._groundCheckDistance / 2;
+                float halfGroundCheckWidth = _player.ChecksData._groundCheckWidth / 2f;
+                float halfGroundCheckDistance = _player.ChecksData._groundCheckDistance / 2f;
+                
                 float halfCastSizeY = castSize.y / 2f;
                 float drawDistance = halfCastSizeY + castDistance;
+
+                DrawRightRay();
+                DrawLeftRay();
+                DrawTopRay();
+                DrawBottomRay();
                 
-                // Horizontals
-                    // Bottom-right
-                Debug.DrawRay(
-                    castOrigin + new Vector3(bounds.extents.x * verticalWidth, 0),
-                    Vector3.down * drawDistance,
-                    Color.blue);
-                
-                    // Bottom-left
-                Debug.DrawRay(
-                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, 0), 
-                    Vector3.down * drawDistance,
-                    Color.blue);
-                
-                    // Top-right
-                Debug.DrawRay(
-                    castOrigin + new Vector3(bounds.extents.x * verticalWidth, 0),
-                    Vector3.up * halfGroundCheckDistance,
-                    Color.blue);
-            
-                    // Top-left
-                Debug.DrawRay(
-                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, 0), 
-                    Vector3.up * halfGroundCheckDistance,
-                    Color.blue);
-            
-                // Top and Bottom
-                    // Bottom
-                Debug.DrawRay(
-                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, drawDistance),
-                    Vector3.right * (bounds.size.x * verticalWidth),
-                    Color.blue);
-                
-                    // Top
-                Debug.DrawRay(
-                    castOrigin + new Vector3(bounds.extents.x * verticalWidth, halfGroundCheckDistance),
-                    Vector3.left * (bounds.size.x * verticalWidth),
-                    Color.blue);
-            }
+                void DrawRightRay()
+                {
+                    Vector3 rayOrigin = new Vector3(
+                        castOrigin.x + halfGroundCheckWidth,
+                        castOrigin.y + halfGroundCheckDistance);
+                    Vector3 rayDirection = Vector3.down;
+                    float rayLength = castSize.y + castDistance;
+                    
+                    Debug.DrawRay(rayOrigin, rayDirection * rayLength, castColor);
+                }
+                void DrawLeftRay()
+                {
+                    Vector3 rayOrigin = new Vector3(
+                        castOrigin.x - halfGroundCheckWidth,
+                        castOrigin.y + halfGroundCheckDistance);
+                    Vector3 rayDirection = Vector3.down;
+                    float rayLength = castSize.y + castDistance;
+                    
+                    Debug.DrawRay(rayOrigin, rayDirection * rayLength, castColor);
+                }
+                void DrawTopRay()
+                {
+                    Vector3 rayOrigin = castOrigin - new Vector3(halfGroundCheckWidth, drawDistance);
+                    Vector3 rayDirection = Vector3.right;
+                    float rayLength = _player.ChecksData._groundCheckWidth;
+                    
+                    Debug.DrawRay(rayOrigin, rayDirection * rayLength, castColor);
+                }
+                void DrawBottomRay()
+                {
+                    Vector3 rayOrigin = castOrigin + new Vector3(halfGroundCheckWidth, halfGroundCheckDistance);
+                    Vector3 rayDirection = Vector3.left;
+                    float rayLength = _player.ChecksData._groundCheckWidth;
+
+                    Debug.DrawRay(rayOrigin, rayDirection * rayLength, castColor);
+                }
+            }   
             
             return hit;
         }
     
         public bool CheckCeiling()
         {
-            //TODO: add VerticalWidth to Scriptableobject
-            const float verticalWidth = 0.8f;
             Bounds bounds = _player.Components.Collider.bounds;
             
             Vector3 castOrigin = new Vector2(bounds.center.x, bounds.max.y);
             Vector2 castSize = new Vector2(
-                bounds.size.x * verticalWidth,
+                _player.ChecksData._ceilingCheckWidth,
                 _player.ChecksData._ceilingCheckDistance);
             const float castDistance = 0f;
+            Color castColor = Color.magenta;
 
             RaycastHit2D hit = Physics2D.BoxCast(castOrigin, castSize, 0,
                 Vector2.up, castDistance, _player.ChecksData._whatIsGround);
@@ -103,48 +106,56 @@ namespace Player
             DrawBoxCast();
             void DrawBoxCast()
             {
-                float halfGroundCheckDistance = _player.ChecksData._groundCheckDistance / 2;
+                float halfCeilingCheckWidth = _player.ChecksData._ceilingCheckWidth / 2f;
+                float halfCeilingCheckDistance = _player.ChecksData._ceilingCheckDistance / 2f;
+                
                 float halfCastSizeY = castSize.y / 2f;
                 float drawDistance = halfCastSizeY + castDistance;
 
-                // Horizontals
-                    // Bottom-right
-                Debug.DrawRay(
-                    castOrigin + new Vector3(bounds.extents.x * verticalWidth, 0),
-                    Vector3.up * drawDistance,
-                    Color.red);
-
-                    // Bottom-left
-                Debug.DrawRay(
-                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, 0),
-                    Vector3.up * drawDistance,
-                    Color.red);
+                DrawRightRay();
+                DrawLeftRay();
+                DrawTopRay();
+                DrawBottomRay();
                 
-                    // Top-right
-                Debug.DrawRay(
-                    castOrigin + new Vector3(bounds.extents.x * verticalWidth, 0),
-                    Vector3.down * halfGroundCheckDistance,
-                    Color.red);
-            
-                    // Top-left
-                Debug.DrawRay(
-                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, 0), 
-                    Vector3.down * halfGroundCheckDistance,
-                    Color.red);
-
-                            
-                // Top and Bottom
-                    // Bottom
-                Debug.DrawRay(
-                    castOrigin - new Vector3(bounds.extents.x * verticalWidth, drawDistance),
-                    Vector2.right * (bounds.size.x * verticalWidth),
-                    Color.red);
+                void DrawRightRay()
+                {
+                    Vector3 rayOrigin = new Vector3(
+                        castOrigin.x + halfCeilingCheckWidth,
+                        castOrigin.y + halfCeilingCheckDistance);
+                    Vector3 rayDirection = Vector3.up;
+                    float rayLength = castSize.y + castDistance;
+                    
+                    Debug.DrawRay(rayOrigin, rayDirection * rayLength, castColor);
+                }
                 
-                    // Top
-                    Debug.DrawRay(
-                        castOrigin + new Vector3(bounds.extents.x * verticalWidth, drawDistance),
-                        Vector2.left * (bounds.size.x * verticalWidth),
-                        Color.red);
+                void DrawLeftRay()
+                {
+                    Vector3 rayOrigin = new Vector3(
+                        castOrigin.x - halfCeilingCheckWidth,
+                        castOrigin.y + halfCeilingCheckDistance);
+                    Vector3 rayDirection = Vector3.up;
+                    float rayLength = castSize.y + castDistance;
+                    
+                    Debug.DrawRay(rayOrigin, rayDirection * rayLength, castColor);
+                }
+                
+                void DrawTopRay()
+                {
+                    Vector3 rayOrigin = castOrigin - new Vector3(halfCeilingCheckWidth, drawDistance);
+                    Vector3 rayDirection = Vector3.right;
+                    float rayLength = _player.ChecksData._groundCheckWidth;
+                    
+                    Debug.DrawRay(rayOrigin, rayDirection * rayLength, castColor);
+                }
+                
+                void DrawBottomRay()
+                {
+                    Vector3 rayOrigin = castOrigin + new Vector3(halfCeilingCheckWidth, halfCeilingCheckDistance);
+                    Vector3 rayDirection = Vector3.left;
+                    float rayLength = _player.ChecksData._groundCheckWidth;
+
+                    Debug.DrawRay(rayOrigin, rayDirection * rayLength, castColor);
+                }
             }
 
             return hit;

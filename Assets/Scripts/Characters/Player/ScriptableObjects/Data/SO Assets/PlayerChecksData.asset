@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: PlayerChecksData
   m_EditorClassIdentifier: 
   _groundCheckDistance: 0.1
+  _groundCheckWidth: 0.25
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   _ceilingCheckDistance: 0.1
+  _ceilingCheckWidth: 0.25
   _wallCheckDistance: 0.05
