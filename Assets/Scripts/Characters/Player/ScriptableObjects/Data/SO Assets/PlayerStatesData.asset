@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec5f15c33fbdd54586e0d2d065ec95d, type: 3}
   m_Name: PlayerStatesData
   m_EditorClassIdentifier: 
-  MovementVelocity: 10
-  JumpVelocity: 15
-  WallSlideVelocity: -0.7
-  WallClimbVelocity: 2
-  WallJumpVelocity: 15
-  WallJumpTime: 0.4
-  WallJumpAngle: {x: 1, y: 2}
-  StartOffset: {x: 0.15, y: 0.35}
-  StopOffset: {x: 0.5, y: 0.25}
-  CrouchMovementVelocity: 5
-  CrouchColliderHeight: 0.6
-  StandColliderHeight: 0.9
+  _movementVelocity: 10
+  _jumpVelocity: 15
+  _wallSlideVelocity: -0.7
+  _wallClimbVelocity: 2
+  _wallJumpVelocity: 15
+  _wallJumpTime: 0.4
+  _wallJumpAngle: {x: 1, y: 2}
+  _startOffset: {x: 0.05, y: 0.35}
+  _stopOffset: {x: 0.5, y: 0.25}
+  _crouchMovementVelocity: 5
+  _crouchColliderHeight: 0.6
+  _standColliderHeight: 0.9

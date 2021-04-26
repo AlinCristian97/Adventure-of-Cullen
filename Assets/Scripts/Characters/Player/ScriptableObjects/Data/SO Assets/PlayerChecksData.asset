@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5ddbe224704a0ca9f5a68d79ceae80, type: 3}
   m_Name: PlayerChecksData
   m_EditorClassIdentifier: 
-  _groundCheckDistance: 0.1
-  _groundCheckWidth: 0.25
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  _ceilingCheckDistance: 0.1
-  _ceilingCheckWidth: 0.25
-  _wallCheckDistance: 0.05
+  _groundCastHeight: 0.1
+  _groundCastWidth: 0.25
+  _ceilingCastHeight: 0.1
+  _ceilingCastWidth: 0.25
+  _wallCastHeight: 0.25
+  _wallCastWidth: 0.1
+  _ledgeCastOriginOffset: 0.25

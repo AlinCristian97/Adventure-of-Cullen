@@ -124,7 +124,7 @@ namespace Player.FSM.States
             Bounds bounds = Player.Components.Collider.bounds;
 
             RaycastHit2D xHit = Physics2D.Raycast(bounds.center, Vector2.right * Player.Utilities.FacingDirection,
-                Player.ChecksData._wallCheckDistance, Player.ChecksData._whatIsGround);
+                Player.ChecksData._wallCastHeight, Player.ChecksData._whatIsGround);
             float xDistance = xHit.distance;
         
             Vector2 cornerPosition = new Vector2((xDistance + 0.015f) * Player.Utilities.FacingDirection, 0f);
